@@ -3,29 +3,29 @@
 
 ## Introduction
 
-L'un des outils le plus important dans l'arsenal d'un ingénieur social c'est l'email. 
+L'un des outils le plus important dans l'arsenal d'un ingénieur social c'est l'email.
 
-L'ingénierie sociale implique très souvent des interactions avec la cible. Ces interactions sont facilitées de nous jours par l'ubiquité des communications numériques. Il est tout à fait normal de recevoir des instructions par email de la part de supérieurs hiérarchiques ou des collègues pour réaliser toute sorte de tâches. Les destins de pays, des opérations financières multimilliardaires, des plans de construction d'un nouvel appareil; tout peut être transmis pas email.
+L'ingénierie sociale implique très souvent des interactions avec la cible. Ces interactions sont facilitées de nos jours par l'ubiquité des communications numériques. Il est tout à fait normal de recevoir des instructions par email de la part de supérieurs hiérarchiques ou des collègues pour réaliser toute sorte de tâches. Les destins de pays, des opérations financières multimilliardaires, des plans de construction d'un nouvel appareil; tout peut être transmis par email.
 
 L'email est aussi utilisé pour les relations privées. Ça peut être donc la voie de communication avec des membres de la famille, des amis, les conjoints, les fils et parents.
 
-Pour complémenter le travail réalisé pour apprendre à connaitre la cible afin de la compromettre, l'ingénieur social a souvent besoin de délivrer une payload utilisant le même canal de communication. L'utilisation d'un serveur mail publique devient parfois compliqué. Si on essaie de faire une campagne de phishing, par exemple, l'emission d'un grand nombre de messages à des destinations différentes peut soulever une alarme qui vous met dans une liste noir. L'utilisation de certaines payloads peut aussi être détecté par votre serveur mail d'envoie.
+Pour complémenter le travail réalisé pour apprendre à connaitre la cible afin de la compromettre, l'ingénieur social a souvent besoin de délivrer une payload utilisant le même canal de communication. L'utilisation d'un serveur mail public devient parfois compliqué. Si on essaie de faire une campagne de phishing, par exemple, l'émission d'un grand nombre de messages à des destinations différentes peut soulever une alarme qui vous met dans une liste noire. L'utilisation de certaines payloads peut aussi être détectée par votre serveur mail d'envoi.
 
-Il est donc très intéressant de ne pas dépendre d'un serveur mail publique. Vous pouvez configurer votre propre serveur email avec quelques manipulations très simples. Ce serveur vous appartient. Il acceptera de faire tout ce que vous lui demanderez de faire, sans poser des questions.
+Il est donc très intéressant de ne pas dépendre d'un serveur mail public. Vous pouvez configurer votre propre serveur email avec quelques manipulations très simples. Ce serveur vous appartient. Il acceptera de faire tout ce que vous lui demanderez de faire, sans poser des questions.
 
 
 ## Une petite note sur l'éthique
 
-Il n'est absolument pas acceptable d'attaquer quelqu'un pour quelque raison que ce soit. 
+Il n'est absolument pas acceptable d'attaquer quelqu'un pour quelque raison que ce soit.
 
-L'utilisation de ces outils à des fins autres que votre propre éducation et formation sans autorisation est strictement interdite par les politiques de ce cours et de l'école, ainsi que par les lois. 
+L'utilisation de ces outils à des fins autres que votre propre éducation et formation sans autorisation est strictement interdite par les politiques de ce cours et de l'école, ainsi que par les lois.
 
 Le but de cet exercice est de vous permettre de vous familiariser avec les outils et comment ils peuvent être utilisés dans le contexte professionnel d'un pentest. Ça vous permettra aussi de comprendre les tactiques de l'adversaire afin de pouvoir les contrer par le biais de la politique, de l'éducation et de la formation.
 
 
 ## Que faut-il faire ?
 
-Voici les activités à réalise dans ce laboratoire. Vous devez : 
+Voici les activités à réalise dans ce laboratoire. Vous devez :
 
 - Installer, configurer et tester votre propre serveur mail
 - Installer le Social Engineering Toolkit (SET)
@@ -39,13 +39,13 @@ Le "rapport" de ce labo est très simple : **Pour chaque tâche, faites des capt
 
 Le projet [Docker Mailserver](https://github.com/docker-mailserver/docker-mailserver) est un système très complet et sophistiqué qui vous permet d'installer et utiliser votre propre serveur mail. Il est en même temps très simple et inclut des fonctionnalités avancées comme des filtres de spam et antivirus (justement ce que l'on veut éviter...).
 
-Vous pouvez visiter le site du projet et apprendre beaucoup de choses à propos de cet outil très puissant. Nous allons pourtant nous contenter de faire un nombre assez réduit de manipulations dans le but de le faire fonctionner rapidement et avec peu d'effort. Ce n'est de loin la bonne utilisation de ce produit. En effet, il peut être déployé pour une utilisation en production. 
+Vous pouvez visiter le site du projet et apprendre beaucoup de choses à propos de cet outil très puissant. Nous allons pourtant nous contenter de faire un nombre assez réduit de manipulations dans le but de le faire fonctionner rapidement et avec peu d'effort. Ce n'est de loin la bonne utilisation de ce produit. En effet, il peut être déployé pour une utilisation en production.
 
-Notre scénario c'est celui d'un attaquant qui se sert de ce serveur pour délivrer des emails de phishing, par exemple, voir des payloads. Notre configuration de base ne nous permettra pas de recevoir des réponses aux mails. Si vous voulez être capable de recevoir des réponses (ce qui peut être le cas dans certains scénarios), il faudra faire du travail supplémentaire pour installer et configurer un serveur DNS capable de fournir des "MX records". La [documentation très complète de Docker Mailserver](https://docker-mailserver.github.io/docker-mailserver/edge/) contient entre autres les informations nécessaires pour configurer votre DNS. L'installation de certificats est aussi normalement important, mais ce ne sera pas fait pour le moment.
+Notre scénario c'est celui d'un attaquant qui se sert de ce serveur pour délivrer des emails de phishing, par exemple, voir des payloads. Notre configuration de base ne nous permettra pas de recevoir des réponses aux mails. Si vous voulez être capable de recevoir des réponses (ce qui peut être le cas dans certains scénarios), il faudra faire du travail supplémentaire pour installer et configurer un serveur DNS capable de fournir des "MX records". La [documentation très complète de Docker Mailserver](https://docker-mailserver.github.io/docker-mailserver/edge/) contient entre autres les informations nécessaires pour configurer votre DNS. L'installation de certificats est aussi normalement importante, mais ce ne sera pas fait pour le moment.
 
 ### Configuration minimaliste de Docker Mailserver
 
-Nous avons testé ce guide sur Kali Linux et macOS Monterey. Son utilisation devrait être possible sur Windows avec peu ou pas de modification. Il vous faudra comprendre votre propre infrastructure afin de faire interagir correctement tous les éléments. 
+Nous avons testé ce guide sur Kali Linux et macOS Monterey. Son utilisation devrait être possible sur Windows avec peu ou pas de modification. Il vous faudra comprendre votre propre infrastructure afin de faire interagir correctement tous les éléments.
 
 Nous allons commencer par créer un répertoire "mailserver" et entrer dedans (ce guide part du principe que vous avez déjà Docker et Docker Compose installés et correctement configurés sur votre plateforme).
 
@@ -104,7 +104,7 @@ La dernière partie de la configuration c'est la création d'un compte que vous 
 ./setup.sh email add vladimir@putin.ru password
 ```
 
-Où ```vladimir@putin.ru```  c'est l'adresse email et le nom d'utilisateur qui seront crées et ```password``` est le mot de passe correspondant. 
+Où ```vladimir@putin.ru```  c'est l'adresse email et le nom d'utilisateur qui seront crées et ```password``` est le mot de passe correspondant.
 
 ### Installation et test
 
@@ -114,7 +114,7 @@ C'est le moment de télécharger l'image, créer le container et tester votre se
 docker-compose -f docker-compose.yml up -d
 ```
 
-Vous pouvez vous servir de la commande ```docker ps``` pour vérifier que votre container est créé et en fonctionnement. 
+Vous pouvez vous servir de la commande ```docker ps``` pour vérifier que votre container est créé et en fonctionnement.
 
 Nous allons faire un test très basique pour nous assurer que le serveur fonctionne. Vous aurez besoin de ```telnet``` ou d'une commande équivalente (vous pouvez utiliser netcat, par exemple):
 
@@ -175,7 +175,7 @@ Livrable : capture de votre configuration du serveur SMTP sur un client mail de 
 
 ---
 
-Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails. Envoyez-vous un email à votre adresse de l'école pour le tester. 
+Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails. Envoyez-vous un email à votre adresse de l'école pour le tester.
 
 Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilisant votre serveur. Puisque vous avez certainement créé un faux compte email, n'oubliez pas de signer le message avec votre vraie nom pour nous permettre de vous identifier.
 
@@ -185,7 +185,7 @@ Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos f
 ```
 ---
 
-## The Social-Engineer Toolkit (SET) 
+## The Social-Engineer Toolkit (SET)
 
 ### A propos de SET
 
@@ -244,13 +244,13 @@ Et pour finir, l'option 2 pour cloner un site web.
 
 ![Menu principal SET](images/harvester4.png)
 
-Il faudra maintenant remplir deux informations : 
+Il faudra maintenant remplir deux informations :
 
 (1) l'adresse IP qui réceptionne la requête POST de votre site cloné. Dans notre cas, vous allez très probablement laisser la valeur par défaut proposée par SET (votre adresse dans le NAT d'une machine virtuelle ou votre adresse locale). Si votre attaque est sur une cible externe et que vous récoltez les identifiants depuis un réseau local derrière un NAT, il vous faudra votre adresse publique et faire quelques manipulations de redirection de ports au niveau de votre routeur.
 
-(2) L'url du site à cloner. 
+(2) L'url du site à cloner.
 
-Certains sites ne fonctionnent pas bien, voir pas du tout. Pour ces cas, il existe la possibilité de modifier localement le clone du site pour le faire fonctionner. On ne va pas le faire dans le cadre de ce labo. 
+Certains sites ne fonctionnent pas bien, voir pas du tout. Pour ces cas, il existe la possibilité de modifier localement le clone du site pour le faire fonctionner. On ne va pas le faire dans le cadre de ce labo.
 
 On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essayer. On avait déjà mentionné Postfinance. L'autre site, c'est notre cher et vénérable gaps :
 
@@ -297,7 +297,7 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 Réponse :
 ```
 
-Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question. 
+Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
 
 ---
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
@@ -310,7 +310,7 @@ Réponse et capture :
 ### Explorer les liens "Phishy" et le courrier électronique "Phishy"
 
 Pour cette dernière partie de notre exploration du phishing, nous allons utiliser un contenu réalisé par les  Dr. Matthew L. Hale, le Dr. Robin Gandhi et la Dr. Briana B. Morrison de [Nebraska GenCyber](
-http://www.nebraskagencyber.com). 
+http://www.nebraskagencyber.com).
 
 Visitez : [https://mlhale.github.io/nebraska-gencyber-modules/phishing/README/ ](https://mlhale.github.io/nebraska-gencyber-modules/phishing/README/) et passez en revue les modules :
 
@@ -338,4 +338,4 @@ Conclusions :
 
 ## Echeance
 
-Le 14 avril 2022 à 10h25
+Le 28 avril 2022 à 10h25
