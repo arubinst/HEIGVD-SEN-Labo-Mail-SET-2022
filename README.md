@@ -80,7 +80,7 @@ ENABLE_AMAVIS = 0
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
 ```
-Réponse :
+Réponse : Amavis content filter (used for ClamAV & SpamAssassin)
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -92,7 +92,14 @@ PERMIT_DOCKER=connected-networks
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
 ```
-Réponse :
+Réponse : connected-networks => 
+Set different options for mynetworks option (can be overwrite in postfix-main.cf)
+# **WARNING**: Adding the docker network's gateway to the list of trusted hosts, e.g. using the `network` or
+# `connected-networks` option, can create an open relay
+# https://github.com/docker-mailserver/docker-mailserver/issues/1405#issuecomment-590106498
+# The same can happen for rootless podman. To prevent this, set the value to "none" or configure slirp4netns
+# https://github.com/docker-mailserver/docker-mailserver/issues/2377
+Add all connected docker networks (ipv4 only)
 ```
 ---
 
