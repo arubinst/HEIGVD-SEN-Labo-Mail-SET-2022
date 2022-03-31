@@ -99,7 +99,12 @@ Set different options for mynetworks option (can be overwrite in postfix-main.cf
 # https://github.com/docker-mailserver/docker-mailserver/issues/1405#issuecomment-590106498
 # The same can happen for rootless podman. To prevent this, set the value to "none" or configure slirp4netns
 # https://github.com/docker-mailserver/docker-mailserver/issues/2377
-Add all connected docker networks (ipv4 only)
+#
+# none => Explicitly force authentication
+# container => Container IP address only
+# host => Add docker container network (ipv4 only)
+# network => Add all docker container networks (ipv4 only)
+# connected-networks => Add all connected docker networks (ipv4 only)
 ```
 ---
 
