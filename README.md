@@ -280,6 +280,12 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
+Page poste finance (Ne march epas bien)
+![Poste](./images/poste-phish.png)
+
+Page Gaps
+![Gaps](./images/gaps-phish.png)
+
 ---
 
 ### Mass Mailer Attack
