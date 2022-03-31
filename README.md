@@ -80,7 +80,9 @@ ENABLE_AMAVIS = 0
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
 ```
-Réponse :
+Réponse : Amavis est un filtre de contenu mail. Il permet de faire du processing sur chaque mail et interfacant avec d'auzres software pour proteger du spam et de malware.
+
+Nous le desactivon pour eviter qu'il n'interfaire avec nos mails qui contiendront des malware.
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -93,6 +95,14 @@ PERMIT_DOCKER=connected-networks
 
 ```
 Réponse :
+
+Les options sont:
+
+- none => Explicitly force authentication
+- container => Container IP address only
+- host => Add docker container network (ipv4 only)
+- network => Add all docker container networks (ipv4 only)
+- connected-networks => Add all connected docker networks (ipv4 only)
 ```
 ---
 
@@ -159,6 +169,8 @@ cGFzc3dvcmQ=                <----- "password" en base64
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
 
+![auth login](./images/mail-login.png)
+
 ---
 
 ### Configuration de votre client mail
@@ -173,6 +185,8 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
 
+![SMTP Settings](./images/smtp-settings.png)
+
 ---
 
 Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails. Envoyez-vous un email à votre adresse de l'école pour le tester. 
@@ -183,6 +197,9 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
+
+![Email](./images/email.png)
+
 ---
 
 ## The Social-Engineer Toolkit (SET) 
