@@ -388,8 +388,7 @@ On y voit également l'adresse IP que SET m'a donné par defaut (10.192.104.149)
 
 ```
 Conclusions : c'était un laboratoire assez interessant. 
-Lors d'un pentest, j'ai dÛ faire une campagne de phishing. Lors de mes recherches pour un outil j'ai lu pas mal de chose du SET mais la courbe d'apprentissage avait l'air trop longue.
-Surtout pour faire une campagne, et je suis parti sur GoPhish qui est un outil uniquement fait pour ça. SET a beaucoup plus de cordes à son arc et beaucoup de possiblité, ça m'a donnée envie de tester plus de choses avec.
+Lors d'un pentest, j'ai dÛ faire une campagne de phishing.J'ai alors cherché un outil, j'ai lu pas mal de choses sur SET mais la courbe d'apprentissage avait l'air trop longue pour faire une campagne rapidement. Je suis parti sur GoPhish qui est un outil uniquement fait pour ça. SET a beaucoup plus de cordes à son arc et beaucoup de possiblité mais qui demande pas mal de temps, ça m'a donnée envie de tester plus de choses avec.
 ```
 ---
 
