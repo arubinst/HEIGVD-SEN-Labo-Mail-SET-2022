@@ -80,7 +80,7 @@ ENABLE_AMAVIS = 0
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
 ```
-Réponse :
+Réponse : L'option permet de desactiver Amavis. Amavis est un filtre de contenu mail open-source. Il permet la detection de spam, virus, erreur dans la syntaxe du mail ou des contenus interdits mais peut également rediriger, trier ou bloquer les emails en fonction de leur contenu, mettre en quarantaine un email suspect ou archiver les emails. Il fournit également un interface pour d'autres filtres come ClamAv (antivirus) SpamAssasin (Antispam).
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -92,7 +92,12 @@ PERMIT_DOCKER=connected-networks
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
 ```
-Réponse :
+Réponse : Cet option permet de définir les réseaux depuis lesquel l'envoi de mail est autorisé.
+- none : Explict Authentification needed
+- container : Container IP only
+- host : Docker host
+- network : Docker bridge (172.16.0.0/12)
+- connected-networks : All docker connected networks
 ```
 ---
 
