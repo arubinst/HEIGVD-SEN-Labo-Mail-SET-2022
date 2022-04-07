@@ -79,8 +79,8 @@ ENABLE_AMAVIS = 0
 ---
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
-```
-Réponse :
+```text
+Réponse : AMaViS veut dire "A Mail Virus Scanner" et c'est un filtre pour e-mail du côté serveur. C'est une protection anti spam, virus et autre malwares contenu dans un mail.
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -91,8 +91,15 @@ PERMIT_DOCKER=connected-networks
 
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
-```
-Réponse :
+```text
+Réponse : les differentes options sont :
+- none => explicitly force authentifcation
+- container => container IP address only
+- host => add docker container network (iPv4 only)
+- network => add all docker container networks (iPv4 only)
+- connected-networks => add all connected docker networks (iPv4 only)
+
+C'est pour définir les reseaux depuis lesquels on va pouvoir envoyer un mail.
 ```
 ---
 
@@ -106,6 +113,8 @@ La dernière partie de la configuration c'est la création d'un compte que vous 
 
 Où ```vladimir@putin.ru```  c'est l'adresse email et le nom d'utilisateur qui seront crées et ```password``` est le mot de passe correspondant.
 
+![](./images/create_user.png)
+
 ### Installation et test
 
 C'est le moment de télécharger l'image, créer le container et tester votre serveur. On utilise docker-compose :
@@ -115,6 +124,10 @@ docker-compose -f docker-compose.yml up -d
 ```
 
 Vous pouvez vous servir de la commande ```docker ps``` pour vérifier que votre container est créé et en fonctionnement.
+
+/!\ J'ai eu une erreur comme quoi il y avait une configuration pas supportée dans mon fichier docker-compose-yml, pour le corriger il faut ajouter "version:3" au debut du fichier /!\
+
+![](./images/erreur1.png)
 
 Nous allons faire un test très basique pour nous assurer que le serveur fonctionne. Vous aurez besoin de ```telnet``` ou d'une commande équivalente (vous pouvez utiliser netcat, par exemple):
 
@@ -130,6 +143,10 @@ Connection to localhost port 25 [tcp/smtp] succeeded!
 ```
 
 Dans mon cas, j'ai configuré le domaine de mon serveur avec ```whitehouse.gov```
+
+![](./images/test1.png)
+
+Dans mon cas, j'ai configuré le domaine de mon serveur avec ```test.com```
 
 Vous pouvez ensuite établir une conversation avec votre serveur. Nous allons en particulier nous authentifier. Si vous ne vous authentifiez pas, le serveur refusera de vous laisser l'utiliser comme un relay (Relay access denied).
 
@@ -155,9 +172,7 @@ cGFzc3dvcmQ=                <----- "password" en base64
 
 #### Faire une capture de votre authentification auprès de votre serveur mail
 
-```
-Livrable : capture de votre conversation/authentification avec le serveur
-```
+![](./images/authentication.png)
 
 ---
 
@@ -169,9 +184,9 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 
 ### Montrez-nous votre configuration à l'aide d'une capture
 
-```
-Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
-```
+J'utilise Thunderbird comme client mail.
+
+![](./images/smtp.png)
 
 ---
 
@@ -180,9 +195,10 @@ Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails.
 Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilisant votre serveur. Puisque vous avez certainement créé un faux compte email, n'oubliez pas de signer le message avec votre vraie nom pour nous permettre de vous identifier.
 
 ---
-```
-Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
-```
+![](./images/mailsent.png)
+
+
+
 ---
 
 ## The Social-Engineer Toolkit (SET)
@@ -263,6 +279,18 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
+**POSTFINANCE** 
+
+![](./images/postfinance.png)
+
+**GAPS**
+
+![](./images/gaps.png)
+
+J'ai essayé avec reddit mais ça ne fonctionne pas :
+
+![](./images/reddit.png)
+
 ---
 
 ### Mass Mailer Attack
@@ -293,8 +321,10 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 ---
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
+![](./images/forgedmail.png)
+
 ```
-Réponse :
+Réponse : j'ai utilisé un mail prédéfini (Computer issue), le mail ne s'est pas fait filtré.
 ```
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
@@ -303,7 +333,7 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture :
+Réponse et capture : pas besoin car ça fonctionnait à l'étape d'avant.
 ```
 ---
 
@@ -328,6 +358,24 @@ Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
+J'ai utilisé le message que j'ai envoyé juste avant. Pour récupérer les informations du header sur Outlook, il suffit de faire un clic droit et d'appuyer sur "Afficher les détails du message"
+
+![](./images/header1.png)
+
+Dans cette partie on peut voir le domaine test.com que j'ai setup dans mon 
+
+![](./images/header2.png)
+
+![](./images/header3.png)
+
+Carré rouge : on peut y voir le score de SPAM de mon email. Il a obtenu un score de 2.6 et il y a ensuite un résumé de comment j'ai eu ce score. L'email aurait été filtré si j'avais eu un score de 4 et il aurait été détruit directement si j'avais eu un score de 5. Grâce au résumé on voit que j'ai gagné énormement de point parce que mon header n'avait pas de date. C'est alors une bonne idée de l'ajouter quand on forge car ça réduit les rsiques de ce retrouver dans le filtre.
+
+Carré vert : on peut y a voir le vrai nom de domaine que j'ai ajouté dans mon docker-compose.yml (test.com) comme FQDN de mon mail-server. On y trouve également une information sur mon OS, car en regardant mon /etc/hosts on voit qu'il donne le nom pop-os.localdomain à l'ip localhost, après pourquoi ça a pris celle-ci je ne sais pas.
+
+![](./images/localhost.png)
+
+On y voit également l'adresse IP que SET m'a donné par defaut (10.192.104.149).
+
 ---
 #### Partagez avec nous vos conclusions.
 
@@ -338,4 +386,4 @@ Conclusions :
 
 ## Echeance
 
-Le 28 avril 2022 à 10h25
+Le 14 avril 2022 à 10h25
