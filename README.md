@@ -98,7 +98,7 @@ Réponse :
     - host : Ajoute l'hôte docker (ipv4 seulement)
     - network : Ajoute le réseau bridge par défaut de docker (172.16.0.0/12)
     - connected-networks : Ajoute tous les réseaux docker connectés (ipv4 seulement)
-Cette option permet de définir qui peut envoyer des mails.
+Cette option permet de définir quels réseaux peut envoyer des mails.
 ```
 ---
 
@@ -165,7 +165,7 @@ cGFzc3dvcmQ=                <----- "password" en base64
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
 
-![image-20220403104334521](figures/image-20220403104334521.png)
+![image-20220407110251971](figures/image-20220407110251971.png)
 
 ---
 
@@ -181,7 +181,7 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
 
-![image-20220403112915351](figures/image-20220403112915351.png)
+![image-20220407111024856](figures/image-20220407111024856.png)
 
 ---
 
@@ -193,7 +193,7 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
-![image-20220403113432543](figures/image-20220403113432543.png)
+![image-20220407111246112](figures/image-20220407111246112.png)
 
 
 
@@ -326,8 +326,10 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
 ```
-Réponse : Le message n'a ni été trouvé dans le filtre anti-spam de l'école ni dans la boîte de réception.
+Réponse : Le message n'a pas été filtré, il est directement arrivé dans ma boîte mail de l'école. J'ai également tenté de l'envoyer depuis l'extérieur du réseau de l'école mais il n'est ni arrivé dans les spams ni dans le filtre Barracuda.
 ```
+
+![image-20220407112524763](figures/image-20220407112524763.png)
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
 
@@ -335,7 +337,7 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture : Le message a donc été envoyé à mon adresse email privée. On peut voir dans la capture ci-dessous qu'il a bien été identifié comme spam. La raison pour laquelle il a été identifié comme spam est qu'il semble être "...semblable à des messages antérieurs identifiés comme des spams".
+Réponse et capture : J'ai essayé d'envoyer un mail avec un autre nom de domaine que ogi.ch car les messages venant de ce domaine n'arrivait pas dans ma boîte privée Gmail. J'ai alors essayé de mettre le nom de domaine jmail.com et le message s'est retrouvé dans les spams.
 ```
 ![image-20220403131924465](figures/image-20220403131924465.png)
 
@@ -437,7 +439,7 @@ Authentication-Results: mx.google.com;
        spf=fail (google.com: domain of nogi@jmail.com does not designate 000.000.000.000 as permitted sender) smtp.mailfrom=nogi@jmail.com
 ```
 
-A plusieurs reprises, on voit apparaître le mot `fail` indiquant que gmail ne considère pas le domaine `jmail.com` comme un expéditeur autorisé. 
+A plusieurs reprises, on voit apparaître le mot `fail` indiquant que Gmail ne considère pas le domaine `jmail.com` comme un expéditeur autorisé. 
 
 
 
@@ -535,7 +537,7 @@ div><div><br></div><div>Alex<br></div></div>
 --00000000000086e1ce05dbbedcdc--
 ```
 
-Les mêmes lignes que l'email précédent indiquent cette fois que gmail considère le domaine `gmail.com` comme un expéditeur autorisé (`fail` est remplacé par `pass`) :
+Les mêmes lignes que l'email précédent indiquent cette fois que Gmail considère le domaine `gmail.com` comme un expéditeur autorisé (`fail` est remplacé par `pass`) :
 
 ```
 ARC-Authentication-Results: i=1; mx.google.com;
@@ -561,7 +563,7 @@ Authentication-Results: mx.google.com;
 #### Partagez avec nous vos conclusions.
 
 ```
-Conclusions : Il est certes facile de créer un serveur mail afin d'envoyer des messages de phishing mais il est cependant plus difficile de faire en sorte que ces messages ne soient pas interprétés comme des spams par les filtres mis en place dans les boîte mail modernes. Même chose lorsqu'il s'agit de créer une fausse page web de login en clonant l'originale, il devient bien plus difficile de la faire paraître légitime auprès des utilisateurs.
+Conclusions : Il est certes facile de créer un serveur mail afin d'envoyer des messages de phishing mais il est cependant plus difficile de faire en sorte que ces messages ne soient pas interprétés comme des spams par les filtres mis en place dans les boîtes mail modernes. Même chose lorsqu'il s'agit de créer une fausse page web de login en clonant l'originale, il devient bien plus difficile de la faire paraître légitime auprès des utilisateurs.
 ```
 ---
 
