@@ -311,8 +311,10 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
 ```
-Réponse :
+Réponse : Non le mail est passé sans problèmes.
 ```
+
+![Mass-Mail1](images/mass-mail.png)
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question. 
 
@@ -320,7 +322,7 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture :
+Réponse et capture :Oui. Il n'est même pas arrivé dans le spam, il a été completement discardé par Google.
 ```
 ---
 
@@ -350,6 +352,21 @@ Pour cette tâche, prenez des captures d'écran de :
 
 ```
 Conclusions :
+
+En analysant les headers du message nous pouvons voir que le premier hop est fait depuis notre addresse locale vers l'ip du container docker. Suivi d'un hop directe depuis l'adresse privé de ma machine vers un serveur mail de l'école.
+```
+
+![Mail headers](images/mail-headers.png)
+
+```
+On peut donc en conclure que la personne qui à envoyé le mail est dans le réseau locale et on peut meme savoir qui c'est grace à son ip. Il est donc favorable de ne pas être dans le meme réseau que le serveur mail cible pour se cacher.
+
+On peut aussi voir le niveau de spam detecté par le serveur mail:
+
+X-Barracuda-Spam-Score: 2.60
+X-Barracuda-Spam-Status: No, SCORE=2.60 using global scores of TAG_LEVEL=1000.0 QUARANTINE_LEVEL=4.0 KILL_LEVEL=5.0 tests=FROM_EXCESS_BASE64, FROM_EXCESS_BASE64_2, MISSING_DATE, MISSING_MID, MISSING_MIMEOLE
+
+Un score de 4.0 met le mail en quarantaine et un score de 5.0 ne laisse pas passer le mail. Notre score de 2.6 passe sans problème le filtre spam de l'ếcole.
 ```
 ---
 
