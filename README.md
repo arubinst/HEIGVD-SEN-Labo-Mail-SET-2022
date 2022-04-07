@@ -417,9 +417,9 @@ Pas de header `Reply-To`, `X-Distribution`, `X-Mailer` ou `Bcc`
 #### Partagez avec nous vos conclusions.
 
 ```
-Conclusions : Il est interessant de pouvoir créer facilement et gérer son propre serveur mail. La configuration Thunderbird est toujours une expérience aussi satisfaisante. Il est interessant de noter que docker-mail ne supporte pas les majuscules dans les addresses. 
+Conclusions : Il est intéressant de pouvoir créer facilement et gérer son propre serveur mail. La configuration Thunderbird est toujours une expérience aussi satisfaisante. Il est interessant de noter que docker-mail ne supporte pas les majuscules dans les adresses. 
 
-SET est un outil très interessant, facile à prendre en main et qui parait très complet.
+SET est un outil très intéressant, facile à prendre en main et qui parait très complet.
 ```
 ---
 
