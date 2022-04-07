@@ -268,6 +268,9 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
+
+J'ai également testé avec webmail.heig-vd.ch et login-live.com mais sans succès pour les 2.
+
 ---
 
 ### Mass Mailer Attack
@@ -299,7 +302,7 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
 ```
-Réponse :
+Réponse : Non mon mail n'a pas été filtré. (Le mail a été envoyé depuis le réseau de l'école)
 ```
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
@@ -308,7 +311,7 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture :
+Réponse et capture : Pas appliqué car marche avec l'addresse de l'école.
 ```
 ---
 
