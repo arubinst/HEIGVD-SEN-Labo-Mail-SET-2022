@@ -92,7 +92,7 @@ PERMIT_DOCKER=connected-networks
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
 ```
-Réponse : Cette option permet de définir différentes options pour l'option mynetworks.
+Réponse : Cette option permet de définir différentes options pour l'option mynetworks. C'est-à-dire que l'on peut choisir depuis quels réseaux il est possible d'envoyer des mails.
 Les différentes options sont:
 none => Force explicitement l'authentification 
 container => Adresse IP du conteneur uniquement 
@@ -279,7 +279,7 @@ Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites p
 
 <img src="figures/image-20220402213332566.png" alt="image-20220402213332566" style="zoom:67%;" />
 
-![image-20220402212410933](figures/image-20220402212410933.png)
+![image-20220407112253185](figures/image-20220407112253185.png)
 
 
 
@@ -289,19 +289,17 @@ Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites p
 
 Nous remarquons quelques problèmes d'affichage (le Accès école devenu Accs cole).
 
-![image-20220402214107191](figures/image-20220402214107191.png)
+![image-20220407112440013](figures/image-20220407112440013.png)
 
 #### Instagram
 
 J'ai voulu tester https://www.instagram.com/?hl=fr mais cela n'a pas fonctionné. J'ai bien eu l'écran de chargement d'Instagram mais la page est ensuite devenue blanche.
 
-
-
 #### RTS
 
 <img src="figures/image-20220403104313166.png" alt="image-20220403104313166" style="zoom:67%;" />
 
-![image-20220403104517207](figures/image-20220403104517207.png)
+![image-20220407112704358](figures/image-20220407112704358.png)
 
 ---
 
@@ -358,7 +356,7 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture : Oui, il s'est retrouvé dans mes spam
+Réponse et capture : Oui, il s'est retrouvé dans mes spams
 ```
 
 ![image-20220403123847741](figures/image-20220403123847741.png)
@@ -453,7 +451,15 @@ X-MS-Exchange-Transport-EndToEndLatency: 00:00:00.1891825
 X-MS-Exchange-Processed-By-BccFoldering: 15.01.2375.024
 ```
 
-Il est intéressant de remarquer que le Barracuda Spam Score est à 3.20. Ce score varie de 0 (pas du spam) à 10 ou plus (spam). Il a pourtant été filtré. Le Return-Path correspond bien à l'adresse mail du champ from.
+Il est intéressant de remarquer que le Barracuda Spam Score est à 3.20. Ce score varie de 0 (pas du spam) à 10 ou plus (spam). Il a pourtant été filtré. 
+
+Nous voyons aussi les causes de ce score de 3.20 (manque de l'header, encodage en base 64, manque de la date,  dynamic-looking rDNS et la règle MJ1963 de Barracuda).
+
+Le Return-Path correspond bien à l'adresse mail du champ From.
+
+Nous pouvons voir le domaine (mail.example.com) ainsi que l'adresse IP.
+
+Les champs Reply-to, X-Distribution, X-Mailer et Bcc n'existent pas.
 
 
 
@@ -514,11 +520,17 @@ UGV0aXQgdGVzdCBzdXIgZ21haWwK
 --===============1026937488467720192==--
 ```
 
-Nous pouvons remarquer que dans `Authentication-Results` le spf est **neutral**. Le Return-Path correspond bien à l'adresse mail du champ from.
+Nous pouvons remarquer que dans `Authentication-Results` le spf est **neutral**.
+
+Le Return-Path correspond bien à l'adresse mail du champ From.
+
+Nous pouvons voir le domaine (mail.example.com) ainsi que l'adresse IP.
+
+Les champs Reply-to, X-Distribution, X-Mailer et Bcc n'existent pas.
 
 
 
-Courrier électronique reçu sur une adresse mail privée (avec modifications des adresses IP):
+Courrier électronique non-spam reçu sur une adresse mail privée (avec modifications des adresses IP):
 
 ```
 Delivered-To: petitchat13@gmail.com
@@ -607,12 +619,19 @@ https://view.ccg.nintendo.com/?qs=b3db05e17b235493ee593a75b7e50dd8887ac882ff4330
 
 Nous pouvons remarquer que dans `Authentication-Results` le spf est **pass**. Le domaine est donc considéré comme un domaine permis.
 
+Le Return-Path ne correspond pas à l'adresse mail du champ From. Ceci est sûrement dû au fait que le mail est une Newsletter.
+
+Nous pouvons voir le domaine (mta29.ccg.nintendo.net) ainsi que l'adresse IP.
+
+Les champs Reply-to, X-Distribution, X-Mailer et Bcc n'existent pas.
+
 ---
 #### Partagez avec nous vos conclusions.
 
 ```
 Conclusions :
-Il est intéressant de créer son propre serveur mail. De plus, l'outil SET est très pratique et il propose énormément d'options.
+Il est intéressant de créer son propre serveur mail. Nous voyons à quel point il peut être facile de se faire passer pour quelqu'un d'autre. Malheureusement, il faut tout de même faire attention à ce que le mail ne se retrouve pas dans les spams. 
+L'outil SET est très pratique et il propose énormément d'options. On voit à quel point il est simple de copier une page web et de récupérer des identifiants par exemple.
 ```
 ---
 
