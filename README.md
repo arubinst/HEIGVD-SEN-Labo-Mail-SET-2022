@@ -334,13 +334,80 @@ Vous avez la liberté de reproduire et d'utiliser ce matériel grâce à sa lice
 
 Pour cette tâche, prenez des captures d'écran de :
 
+
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
+Voici le message de l'étape précédente reçu sur mon addresse de l'école:
+
+```
+Received: from EIMAIL01.einet.ad.eivd.ch (10.192.41.71) by
+ EIMAIL01.einet.ad.eivd.ch (10.192.41.71) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24 via Mailbox Transport; Thu, 7 Apr 2022 09:00:48 +0200
+Received: from EIMAIL03.einet.ad.eivd.ch (10.192.41.73) by
+ EIMAIL01.einet.ad.eivd.ch (10.192.41.71) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Thu, 7 Apr 2022 09:00:47 +0200
+Received: from mail01.heig-vd.ch (10.192.222.28) by EIMAIL03.einet.ad.eivd.ch
+ (10.192.41.73) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.24 via Frontend
+ Transport; Thu, 7 Apr 2022 09:00:47 +0200
+X-ASG-Debug-ID: 1649314846-1114bd34058cc9e0001-YtEL9b
+Received: from mail.example.com ([10.193.20.223]) by mail01.heig-vd.ch with ESMTP id OGGu8Xedwj5mtgud for <leonard.besseau@heig-vd.ch>; Thu, 07 Apr 2022 09:00:47 +0200 (CEST)
+X-Barracuda-Envelope-From: natalie@crunch-de-ses-morts.ch
+X-Barracuda-RBL-Trusted-Forwarder: 10.193.20.223
+Received: from [127.0.1.1] (unknown [172.18.0.1])
+	by mail.example.com (Postfix) with ESMTPA id 62E334C26CB
+	for <leonard.besseau@heig-vd.ch>; Thu,  7 Apr 2022 03:00:46 -0400 (EDT)
+Content-Type: multipart/mixed;
+	boundary="===============0603072422493991407=="
+MIME-Version: 1.0
+From: =?utf-8?b?UFBNUA==?= <natalie@crunch-de-ses-morts.ch>
+To: <leonard.besseau@heig-vd.ch>
+X-Priority: 1 (Highest)
+X-MSMail-Priority: High
+Subject: =?utf-8?b?TGUgcmV0b3VyIGR1IENydW5jaA==?=
+X-Barracuda-Connect: UNKNOWN[10.193.20.223]
+X-Barracuda-Start-Time: 1649314846
+X-Barracuda-URL: https://quarantine.heig-vd.ch:443/cgi-mod/mark.cgi
+X-ASG-Orig-Subj: =?utf-8?b?TGUgcmV0b3VyIGR1IENydW5jaA==?=
+X-Virus-Scanned: by bsmtpd at heig-vd.ch
+X-Barracuda-Scan-Msg-Size: 68
+X-Barracuda-BRTS-Status: 1
+X-Barracuda-Spam-Score: 2.60
+X-Barracuda-Spam-Status: No, SCORE=2.60 using global scores of TAG_LEVEL=1000.0 QUARANTINE_LEVEL=4.0 KILL_LEVEL=5.0 tests=FROM_EXCESS_BASE64, FROM_EXCESS_BASE64_2, MISSING_DATE, MISSING_MID, MISSING_MIMEOLE
+X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.97182
+	Rule breakdown below
+	 pts rule name              description
+	---- ---------------------- --------------------------------------------------
+	0.14 MISSING_MID            Missing Message-Id: header
+	0.01 FROM_EXCESS_BASE64     From: base64 encoded unnecessarily
+	0.00 MISSING_MIMEOLE        Message has X-MSMail-Priority, but no X-MimeOLE
+	1.40 MISSING_DATE           Missing Date: header
+	1.05 FROM_EXCESS_BASE64_2   From: base64 encoded unnecessarily
+Message-ID: <a2db38a4-e626-4aeb-9cb3-fb7232d8b6e7@EIMAIL03.einet.ad.eivd.ch>
+Return-Path: natalie@crunch-de-ses-morts.ch
+Date: Thu, 7 Apr 2022 09:00:47 +0200
+X-MS-Exchange-Organization-Network-Message-Id: b7794603-3da6-40eb-ef43-08da186457ff
+X-MS-Exchange-Organization-AVStamp-Enterprise: 1.0
+X-MS-Exchange-Organization-AuthSource: EIMAIL03.einet.ad.eivd.ch
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:00.1622857
+X-MS-Exchange-Processed-By-BccFoldering: 15.01.2375.024
+
+```
+
+On peut voir que ce message a reçu un score de spam de 2.60 par Barracuda et n'est donc pas considéré comme un spam. L'échelle du score est de 0 (message normal) à 10 (spam). On peut voir que les points considérés comme les plus importants par Barracuda lors du calcul de ce score est l'absence de header pour la date (1.40) (Malgré la précense d'un header Date, mais qui a probablement été rajouté par Barracuda) et l'utilisation excessive de la base64 (1.05), probalement du au fait que le nom du FROM soit encodé de même que le sujet du message.
+
+Au niveau des headers, on peut observer que le Return-Path correspond bien au champ FROM.
+Pas de header `Reply-To`, `X-Distribution`, `X-Mailer` ou `Bcc`
 
 ---
 #### Partagez avec nous vos conclusions.
 
 ```
-Conclusions :
+Conclusions : Il est interessant de pouvoir créer facilement et gérer son propre serveur mail. La configuration Thunderbird est toujours une expérience aussi satisfaisante. Il est interessant de noter que docker-mail ne supporte pas les majuscules dans les addresses. 
+
+SET est un outil très interessant, facile à prendre en main et qui parait très complet.
 ```
 ---
 
