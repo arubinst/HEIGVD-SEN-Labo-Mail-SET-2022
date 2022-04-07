@@ -125,7 +125,7 @@ docker-compose -f docker-compose.yml up -d
 
 Vous pouvez vous servir de la commande ```docker ps``` pour vérifier que votre container est créé et en fonctionnement.
 
-/!\ J'ai eu une erreur comme quoi il y avait une configuration pas supportée dans mon fichier docker-compose-yml, pour le corriger il faut ajouter "version:3" au debut du fichier /!\
+/!\ J'ai eu une erreur comme quoi il y avait une configuration pas supportée dans mon fichier docker-compose-yml, pour le corriger il faut ajouter "version: "3"" au debut du fichier /!\
 
 ![](./images/erreur1.png)
 
@@ -324,7 +324,7 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 ![](./images/forgedmail.png)
 
 ```
-Réponse : j'ai utilisé un mail prédéfini (Computer issue), le mail ne s'est pas fait filtré.
+Réponse : j'ai utilisé un mail prédéfini (Computer issue), le mail ne s'est pas fait filtré. 
 ```
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
@@ -332,9 +332,16 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 ---
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
-```
-Réponse et capture : pas besoin car ça fonctionnait à l'étape d'avant.
-```
+J'ai essayé d'envoyer un mail à mon adresse privée gmail. Celui-ci s'est retrouvé dans le dossier de spam.
+
+![](./images/filteredemail.png)
+
+On met dit qu'il a filtré mon mail parce qu'il est "semblable à des messages antérieurs". Si on regarde le header on peut voir que google n'a pas autorisé mon adresse IP à envoyer des messages. Gmail utilise un SPF (Sender Policy Framework) qui est un protocol d'authentification qui regarde dans sa base de donnée si l'IP de l'émetteur s'y trouve. Dans mon cas j'ai eu un *softfail* qui envoie mon mail dans le dossier spam.
+
+![](./images/softfail.png)
+
+Source : https://knowledge.ondmarc.redsift.com/en/articles/1148885-spf-hard-fail-vs-spf-soft-fail
+
 ---
 
 ### Explorer les liens "Phishy" et le courrier électronique "Phishy"
@@ -368,7 +375,7 @@ Dans cette partie on peut voir le domaine test.com que j'ai setup dans mon
 
 ![](./images/header3.png)
 
-Carré rouge : on peut y voir le score de SPAM de mon email. Il a obtenu un score de 2.6 et il y a ensuite un résumé de comment j'ai eu ce score. L'email aurait été filtré si j'avais eu un score de 4 et il aurait été détruit directement si j'avais eu un score de 5. Grâce au résumé on voit que j'ai gagné énormement de point parce que mon header n'avait pas de date. C'est alors une bonne idée de l'ajouter quand on forge car ça réduit les rsiques de ce retrouver dans le filtre.
+Carré rouge : on peut y voir le score de SPAM de mon email. Il utilise **Barracuda** qui est un Spam firewall qui est utilisé par des grandes organisation. Il score de 0 à 10 et nous avons obtenu un score de 2.6 et il y a ensuite un résumé de comment j'ai eu ce score. L'email aurait été quarantainé si j'avais eu un score de 4 et il aurait été détruit directement si j'avais eu un score de 5. Grâce au résumé on voit que j'ai gagné énormement de point parce que mon header n'avait pas de date. C'est alors une bonne idée de l'ajouter quand on forge car ça réduit les rsiques de ce retrouver dans le filtre.
 
 Carré vert : on peut y a voir le vrai nom de domaine que j'ai ajouté dans mon docker-compose.yml (test.com) comme FQDN de mon mail-server. On y trouve également une information sur mon OS, car en regardant mon /etc/hosts on voit qu'il donne le nom pop-os.localdomain à l'ip localhost, après pourquoi ça a pris celle-ci je ne sais pas.
 
@@ -380,7 +387,9 @@ On y voit également l'adresse IP que SET m'a donné par defaut (10.192.104.149)
 #### Partagez avec nous vos conclusions.
 
 ```
-Conclusions :
+Conclusions : c'était un laboratoire assez interessant. 
+Lors d'un pentest, j'ai dÛ faire une campagne de phishing. Lors de mes recherches pour un outil j'ai lu pas mal de chose du SET mais la courbe d'apprentissage avait l'air trop longue.
+Surtout pour faire une campagne, et je suis parti sur GoPhish qui est un outil uniquement fait pour ça. SET a beaucoup plus de cordes à son arc et beaucoup de possiblité, ça m'a donnée envie de tester plus de choses avec.
 ```
 ---
 
