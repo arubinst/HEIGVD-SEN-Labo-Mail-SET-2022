@@ -185,7 +185,7 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
 
-![SMTP Settings](./images/smtp-settings.png)
+![SMTP Settings](./images/smtp-config.png)
 
 ---
 
@@ -279,6 +279,12 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 #### Soumettre des captures d'écran
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
+
+Page poste finance (Ne march epas bien)
+![Poste](./images/poste-phish.png)
+
+Page Gaps
+![Gaps](./images/gaps-phish.png)
 
 ---
 
