@@ -95,7 +95,7 @@ PERMIT_DOCKER=connected-networks
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
 ```
-Réponse : Cet option permet de définir les réseaux depuis lesquel l'envoi de mail est autorisé.
+Réponse : Cette option permet de définir les réseaux depuis lesquels l'envoi de mail est autorisé.
 - none : Explict Authentification needed
 - container : Container IP only
 - host : Docker host
