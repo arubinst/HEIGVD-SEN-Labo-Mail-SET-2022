@@ -79,9 +79,12 @@ ENABLE_AMAVIS = 0
 ---
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
+
+
 ```
 Réponse : L'option permet de desactiver Amavis. Amavis est un filtre de contenu mail open-source. Il permet la detection de spam, virus, erreur dans la syntaxe du mail ou des contenus interdits mais peut également rediriger, trier ou bloquer les emails en fonction de leur contenu, mettre en quarantaine un email suspect ou archiver les emails. Il fournit également un interface pour d'autres filtres come ClamAv (antivirus) SpamAssasin (Antispam).
 ```
+![image_amavis](./images/amavis.png)
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
 
@@ -100,6 +103,7 @@ Réponse : Cet option permet de définir les réseaux depuis lesquel l'envoi de 
 - connected-networks : All docker connected networks
 ```
 ---
+![image_permit-docker](./images/permit-docker.png)
 
 Vous allez maintenant éditer le fichier ```docker-compose.yml```. Ce fichier contient aussi une configuration de base qui est fonctionnelle sans modification. Vous pouvez pourtant changer le ```domainname``` dans ce fichier. Vous pouvez choisir ce qui vous convient. Vous voulez utiliser ```gmail.com```? Allez-y ! C'est votre serveur !
 
@@ -163,7 +167,7 @@ cGFzc3dvcmQ=                <----- "password" en base64
 ```
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
-
+![image_auth](./images/auth.png)
 ---
 
 ### Configuration de votre client mail
@@ -177,7 +181,7 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 ```
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
-
+![image_SMTP](./images/SMTP_config.png)
 ---
 
 Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails. Envoyez-vous un email à votre adresse de l'école pour le tester.
@@ -188,6 +192,7 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
+![image_mail](./images/Mail.png)
 ---
 
 ## The Social-Engineer Toolkit (SET)
@@ -268,6 +273,10 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
+![image_poste](./images/SET_post.png)
+
+![image_gaps](./images/SET_Gaps.png)
+
 
 J'ai également testé avec webmail.heig-vd.ch et login-live.com mais sans succès pour les 2.
 
@@ -304,6 +313,8 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 ```
 Réponse : Non mon mail n'a pas été filtré. (Le mail a été envoyé depuis le réseau de l'école)
 ```
+
+![image_PPMP](./images/"Mail PPMP".png)
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
 
