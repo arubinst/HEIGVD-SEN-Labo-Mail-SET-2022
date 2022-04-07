@@ -102,8 +102,9 @@ Réponse : Cet option permet de définir les réseaux depuis lesquel l'envoi de 
 - network : Docker bridge (172.16.0.0/12)
 - connected-networks : All docker connected networks
 ```
----
 ![image_permit-docker](./images/permit-docker.png)
+---
+
 
 Vous allez maintenant éditer le fichier ```docker-compose.yml```. Ce fichier contient aussi une configuration de base qui est fonctionnelle sans modification. Vous pouvez pourtant changer le ```domainname``` dans ce fichier. Vous pouvez choisir ce qui vous convient. Vous voulez utiliser ```gmail.com```? Allez-y ! C'est votre serveur !
 
