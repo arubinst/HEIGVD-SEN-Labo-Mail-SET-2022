@@ -82,7 +82,7 @@ ENABLE_AMAVIS = 0
 
 
 ```
-Réponse : L'option permet de desactiver Amavis. Amavis est un filtre de contenu mail open-source. Il permet la detection de spam, virus, erreur dans la syntaxe du mail ou des contenus interdits mais peut également rediriger, trier ou bloquer les emails en fonction de leur contenu, mettre en quarantaine un email suspect ou archiver les emails. Il fournit également un interface pour d'autres filtres come ClamAv (antivirus) SpamAssasin (Antispam).
+Réponse : L'option permet de désactiver Amavis. Amavis est un filtre de contenu mail open-source. Il permet la détection de spam, virus, erreur dans la syntaxe du mail ou des contenus interdits mais peut également rediriger, trier ou bloquer les emails en fonction de leur contenu, mettre en quarantaine un email suspect ou archiver les emails. Il fournit également un interface pour d'autres filtres comme ClamAv (antivirus) SpamAssasin (Antispam).
 ```
 ![image_amavis](./images/amavis.png)
 
