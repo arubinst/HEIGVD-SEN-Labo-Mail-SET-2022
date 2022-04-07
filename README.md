@@ -80,7 +80,7 @@ ENABLE_AMAVIS = 0
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
 ```
-Réponse :
+Réponse : Cette fonctionnalité permets de désactiver AMAVIS. AMAVIS permet le filtrage des emails (spamms).
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -92,7 +92,13 @@ PERMIT_DOCKER=connected-networks
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
 ```
-Réponse :
+Réponse : Les différentes options ->
+ - none : Force l'authentification
+ - container : N'accèpte que l'IP du container
+ - network : Ajoute le pont réseau de docker par défaut (172.16.0.0/12)
+ - connected-networks : Ajoute tous les réseaux connectés de Docker (mais seulement en ipv4)
+
+PERMIT_DOCKER permets de configurer le réseau pour fonctionner avec Docker.
 ```
 ---
 
@@ -158,6 +164,7 @@ cGFzc3dvcmQ=                <----- "password" en base64
 ```
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
+![smtp_login](images/SMPT_login.png)
 
 ---
 
@@ -172,6 +179,8 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 ```
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
+
+![config_client.png](images/config_client.png)
 
 ---
 
