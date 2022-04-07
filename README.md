@@ -314,7 +314,7 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 Réponse : Non mon mail n'a pas été filtré. (Le mail a été envoyé depuis le réseau de l'école)
 ```
 
-![image_PPMP](./images/"Mail PPMP".png)
+![image_PPMP](./images/"MailPPMP".png)
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
 
