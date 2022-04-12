@@ -1,5 +1,7 @@
 # Teaching-HEIGVD-SEN-2022-Laboratoire-Docker-Mail et SET
 
+> Auteur: Noémie Plancherel
+> Date: 14.04.22
 
 ## Introduction
 
