@@ -101,13 +101,13 @@ Réponse : les options disponibles sont :
 - network : Ajout le pont par défaut du docker  (IPv4)
 - connected-networks : Ajoute tous les réseaux docker connectés (IPv4)
 
-Cette option permet d'indiquer depuis quel(s) réseau(x) l'on souhaite envoyer notre mail.
+Cette option permet d'indiquer la passerelle / les réseaux docker que l'on souhaite utiliser pour l'envoi de mail.
 ```
 ---
 
 Vous allez maintenant éditer le fichier ```docker-compose.yml```. Ce fichier contient aussi une configuration de base qui est fonctionnelle sans modification. Vous pouvez pourtant changer le ```domainname``` dans ce fichier. Vous pouvez choisir ce qui vous convient. Vous voulez utiliser ```gmail.com```? Allez-y ! C'est votre serveur !
 
-> heigvd.ch
+> ici heigvd.ch
 
 La dernière partie de la configuration c'est la création d'un compte que vous pouvez utiliser pour envoyer vos emails. Il suffit d'utiliser la commande suivante, avec évidement les paramètres que vous désirez. Ce compte sera utilisé pour vous authentifier auprès de votre serveur mail :
 
@@ -124,7 +124,7 @@ C'est le moment de télécharger l'image, créer le container et tester votre se
 ```bash
 docker-compose -f docker-compose.yml up -d
 
-sudo ~/.docker/cli-plugins/docker-compose -f docker-compose.yml up -d
+# sudo ~/.docker/cli-plugins/docker-compose -f docker-compose.yml up -d
 ```
 
 Vous pouvez vous servir de la commande ```docker ps``` pour vérifier que votre container est créé et en fonctionnement. 
@@ -302,7 +302,7 @@ Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites p
 
 > La Poste
 
-![settoolkit_reddit_web](images/settoolkit_poste_web.png)
+<img src="images/settoolkit_poste_web.png" alt="settoolkit_reddit_web" style="zoom:67%;" />
 
 ![settoolkit_poste](images/settoolkit_poste.png)
 
@@ -310,7 +310,7 @@ Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites p
 
 > Reddit
 
-<img src="images/settoolkit_reddit_web.png" alt="settoolkit_reddit_web" style="zoom:67%;" />
+<img src="images/settoolkit_reddit_web.png" alt="settoolkit_reddit_web" style="zoom: 50%;" />
 
 ![settoolkit_reddit](images/settoolkit_reddit.png)
 
@@ -412,11 +412,13 @@ Pour cette tâche, prenez des captures d'écran de :
 
 J'ai réutilisé l'entête du mail placé en quarantaine par le service de l'HEIG. En consultant le mail, il est possible de cliquer sur "afficher la source" pour consulter l'entête. 
 
-En encadré rouge, on peut voir le domaine heigvd.ch qui a été configuré pour le serveur SMTP. 
+En encadré rouge, on peut voir le domaine heigvd.ch qui a été configuré pour le serveur SMTP avec l'entête `Received`. 
 
-En encadré bleu, en première position on a le faux émetteur `alain.berset@gmail.com` et comme destinataire, mon adresse mail de l'école, `gwendoline.dossegger@heig-vd.ch`. 
+En encadré bleu, en première position on a le faux émetteur `alain.berset@gmail.com` (entête `From`) et comme destinataire (entête `To`), mon adresse mail de l'école, `gwendoline.dossegger@heig-vd.ch`. 
 
-En encadré rose, on retrouve le score SPAM de l'email et déterminé par Barracuda. TODO
+En encadré rose, on retrouve le score SPAM de 4.56 de l'email et déterminé par Barracuda. Ce score est présent avec l'entête `X-Barracuda-Spam-Score`. Un score a 0.0 indique que le mail n'est pas suspect tandit que si le score est suppérieur à 3.5 il sera considéré comme un spam. La limite maximal est de 10.0. On remarque aussi dans l'entête `X-BarracudaSpam-Status`, si le score est minimum à 4.0 le mail est mis en quarantaine et dès qu'il dépasse 5.0 il est auto-détruit. 
+
+Avec l'entête `X-Barracuda-Spam-Report`, on a un bref récapitulatif des points du score.
 
 <img src="images/entete.png" alt="settoolkit_reddit" style="zoom:70%;" />
 
