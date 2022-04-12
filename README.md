@@ -81,6 +81,9 @@ ENABLE_AMAVIS = 0
 
 ```
 Réponse :
+
+Amavis est un filtre anti spam open-source qui est intégré par défaut dans docker-mailserver. Nous n'avons pas besoin des fonctionnalités de filtrage dans ce labo, c'est pourquoi nous désactivons Amavis avec cette option.
+Source : https://amavis.org/
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -93,7 +96,17 @@ PERMIT_DOCKER=connected-networks
 
 ```
 Réponse :
+none => Explicitly force authentication
+container => Container IP address only
+host => Add docker container network (ipv4 only)
+network => Add all docker container networks (ipv4 only)
+connected-networks => Add all connected docker networks (ipv4 only)
+
+Lien doc: https://docker-mailserver.github.io/docker-mailserver/edge/config/environment/#permit_docker
+
 ```
+TODO
+
 ---
 
 Vous allez maintenant éditer le fichier ```docker-compose.yml```. Ce fichier contient aussi une configuration de base qui est fonctionnelle sans modification. Vous pouvez pourtant changer le ```domainname``` dans ce fichier. Vous pouvez choisir ce qui vous convient. Vous voulez utiliser ```gmail.com```? Allez-y ! C'est votre serveur !
@@ -155,9 +168,9 @@ cGFzc3dvcmQ=                <----- "password" en base64
 
 #### Faire une capture de votre authentification auprès de votre serveur mail
 
-```
-Livrable : capture de votre conversation/authentification avec le serveur
-```
+![image-20220406140056320](images/image-20220406140056320.png)
+
+remarque: pour que mon OS reconnaisse le domaine, j'ai ajouté `it.works` dans /etc/hosts. Cette remarque est valable pour toutes les autres parties également 
 
 ---
 
@@ -169,9 +182,17 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 
 ### Montrez-nous votre configuration à l'aide d'une capture
 
-```
-Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
-```
+Config Thunderbird:
+
+![image-20220406141628901](images/image-20220406141628901.png)
+
+![image-20220406140717049](images/image-20220406140717049.png
+
+Fonctionne aussi si on donne "localhost":
+
+![image-20220406141509131](images/image-20220406141509131.png)
+
+![image-20220412141908021](images/image-20220412141908021.png)
 
 ---
 
@@ -180,6 +201,8 @@ Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails.
 Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilisant votre serveur. Puisque vous avez certainement créé un faux compte email, n'oubliez pas de signer le message avec votre vraie nom pour nous permettre de vous identifier.
 
 ---
+![image-20220406145536146](images/image-20220406145536146.png)
+
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
@@ -338,4 +361,4 @@ Conclusions :
 
 ## Echeance
 
-Le 28 avril 2022 à 10h25
+Le 14 avril 2022 à 10h25
