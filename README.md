@@ -80,7 +80,9 @@ ENABLE_AMAVIS = 0
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
 ```
-Réponse :
+Réponse : désactivé le filtre de contenu open-source pour les mails electrionique. Il permet de détecter des virus, spams ou pièces jointes interdites. 
+
+Amavis est l'acronyme de "A Mail Virus Scanner". Comme cité ci-dessus, c'est un filtre de contenu d'email côté serveur qui détecte les virus, les spams et autres éléments malveillants. 
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -92,11 +94,20 @@ PERMIT_DOCKER=connected-networks
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
 ```
-Réponse :
+Réponse : les options disponibles sont :
+- none : force explicitement l'authentification 
+- container : IP adresse du container uniquement
+- host : Ajoute un hôte docker (IPv4)
+- network : Ajout le pont par défaut du docker  (IPv4)
+- connected-networks : Ajoute tous les réseaux docker connectés (IPv4)
+
+Cette option permet d'indiquer depuis quel(s) réseau(x) l'on souhaite envoyer notre mail.
 ```
 ---
 
 Vous allez maintenant éditer le fichier ```docker-compose.yml```. Ce fichier contient aussi une configuration de base qui est fonctionnelle sans modification. Vous pouvez pourtant changer le ```domainname``` dans ce fichier. Vous pouvez choisir ce qui vous convient. Vous voulez utiliser ```gmail.com```? Allez-y ! C'est votre serveur !
+
+> heigvd.ch
 
 La dernière partie de la configuration c'est la création d'un compte que vous pouvez utiliser pour envoyer vos emails. Il suffit d'utiliser la commande suivante, avec évidement les paramètres que vous désirez. Ce compte sera utilisé pour vous authentifier auprès de votre serveur mail :
 
@@ -112,6 +123,8 @@ C'est le moment de télécharger l'image, créer le container et tester votre se
 
 ```bash
 docker-compose -f docker-compose.yml up -d
+
+sudo ~/.docker/cli-plugins/docker-compose -f docker-compose.yml up -d
 ```
 
 Vous pouvez vous servir de la commande ```docker ps``` pour vérifier que votre container est créé et en fonctionnement. 
@@ -159,6 +172,8 @@ cGFzc3dvcmQ=                <----- "password" en base64
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
 
+![](images/authentificationMail.png)
+
 ---
 
 ### Configuration de votre client mail
@@ -173,6 +188,10 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
 
+![](images/serveur_settings1.png)
+
+
+
 ---
 
 Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails. Envoyez-vous un email à votre adresse de l'école pour le tester. 
@@ -181,8 +200,10 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 
 ---
 ```
-Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
+Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...	
 ```
+![](images/test_mail.png)
+
 ---
 
 ## The Social-Engineer Toolkit (SET) 
@@ -263,6 +284,38 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
+> Gaps
+
+<img src="images/settoolkit_gaps_web.png" style="zoom: 67%;" />
+
+![settoolkit_gaps](/home/wewelox/Documents/01SEN_Mail/images/settoolkit_gaps.png)
+
+
+
+>  Github
+
+<img src="images/settoolkit_github_web.png" alt="settoolkit_reddit_web" style="zoom:67%;" />
+
+![settoolkit_github](images/settoolkit_github.png)
+
+
+
+> La Poste
+
+![settoolkit_reddit_web](images/settoolkit_poste_web.png)
+
+![settoolkit_poste](images/settoolkit_poste.png)
+
+
+
+> Reddit
+
+<img src="images/settoolkit_reddit_web.png" alt="settoolkit_reddit_web" style="zoom:67%;" />
+
+![settoolkit_reddit](images/settoolkit_reddit.png)
+
+
+
 ---
 
 ### Mass Mailer Attack
@@ -294,8 +347,27 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
 ```
-Réponse :
+Réponse : 
+J'ai réalisé plusieurs tentatives sur mon adresse de l'école avec des noms de domaines différents. Parfois je n'étais pas filtrée, par exemple avec support@heig-vd.ch et bill.gates@microsoft.com, le mail est directement transmis dans la boite de réception. Alors qu'avec alain.berset@gmail.com, le mail est placé en quarantaine. 
+
+Le mail s'est fait filtré car il manquait les headers Message-Id et Date, les From était inutilement encodé en base64 et aussi sur la règle personnalisée de l'école.
 ```
+
+> support@heig-vd.ch pas filtré 
+
+<img src="images/m2.png" alt="image-20220411103245276" style="zoom:80%;" />
+
+![image-20220411103245276](images/mail.png)
+
+
+
+> alain.berset@gmail.com filtré
+
+![image-20220411103245276](images/conf_alain.png)
+
+![image-20220411103245276](images/alain.png)
+
+<img src="images/quarantaine.png" alt="image-20220411103245276" style="zoom:67%;" />
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question. 
 
@@ -303,8 +375,16 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture :
+Réponse et capture : le mail se fait filtrer car il manque des Headers comme celui contenant la Date et Message-Id. Les forms ont été détectée comme trop encodé en base64 inutilement. 
 ```
+J'ai aussi essayé avec une adresse privée. Cette fois.ci, le mail a été placé dans les spams. 
+
+![settoolkit_reddit](images/mail.PNG)
+
+<img src="images/mail_perso.png" alt="settoolkit_reddit" style="zoom:70%;" />
+
+
+
 ---
 
 ### Explorer les liens "Phishy" et le courrier électronique "Phishy"
@@ -328,11 +408,26 @@ Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
+
+
+J'ai réutilisé l'entête du mail placé en quarantaine par le service de l'HEIG. En consultant le mail, il est possible de cliquer sur "afficher la source" pour consulter l'entête. 
+
+En encadré rouge, on peut voir le domaine heigvd.ch qui a été configuré pour le serveur SMTP. 
+
+En encadré bleu, en première position on a le faux émetteur `alain.berset@gmail.com` et comme destinataire, mon adresse mail de l'école, `gwendoline.dossegger@heig-vd.ch`. 
+
+En encadré rose, on retrouve le score SPAM de l'email et déterminé par Barracuda. TODO
+
+<img src="images/entete.png" alt="settoolkit_reddit" style="zoom:70%;" />
+
+
+
 ---
 #### Partagez avec nous vos conclusions.
 
 ```
-Conclusions :
+Conclusions : Laboratoire assez fun malgrès le fait que ma version de Docker a posé problème pour utiliser la commande en tant que telle (grosse perte de temps ici). 
+Très intéressant de découvrir de nouveaux outils et constater le gros potentiel qu'ils ont.
 ```
 ---
 
