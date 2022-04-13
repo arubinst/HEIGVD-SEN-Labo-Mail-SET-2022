@@ -80,7 +80,9 @@ ENABLE_AMAVIS = 0
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
 ```
-Réponse :
+Réponse : Amavis est un filtre de contenu mail. Il permet de faire du processing sur chaque mail et interfacant avec d'auzres software pour proteger du spam et de malware.
+
+Nous le desactivon pour eviter qu'il n'interfaire avec nos mails qui contiendront des malware.
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -93,6 +95,16 @@ PERMIT_DOCKER=connected-networks
 
 ```
 Réponse :
+
+Les options sont:
+
+- none => Explicitly force authentication
+- container => Container IP address only
+- host => Add docker container network (ipv4 only)
+- network => Add all docker container networks (ipv4 only)
+- connected-networks => Add all connected docker networks (ipv4 only)
+
+Cette option permet de définir quels réseaux lier à notre machine ont le droit de se connecter au serveur mail.
 ```
 ---
 
@@ -159,6 +171,8 @@ cGFzc3dvcmQ=                <----- "password" en base64
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
 
+![auth login](./images/mail-login.png)
+
 ---
 
 ### Configuration de votre client mail
@@ -173,6 +187,8 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
 
+![SMTP Settings](./images/smtp-config.png)
+
 ---
 
 Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails. Envoyez-vous un email à votre adresse de l'école pour le tester.
@@ -183,6 +199,9 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
+
+![Email](./images/email.png)
+
 ---
 
 ## The Social-Engineer Toolkit (SET)
@@ -263,6 +282,12 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
+Page poste finance (Ne marche pas bien)
+![Poste](./images/poste-phish.png)
+
+Page Gaps
+![Gaps](./images/gaps_phish.png)
+
 ---
 
 ### Mass Mailer Attack
@@ -294,16 +319,18 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
 ```
-Réponse :
+Réponse : Non le mail est passé sans problèmes.
 ```
 
-Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
+![Mass-Mail1](images/mass-mail.png)
+
+Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question. 
 
 ---
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture :
+Réponse et capture :Oui. Il n'est même pas arrivé dans le spam, il a été completement discardé par Google.
 ```
 ---
 
@@ -333,6 +360,21 @@ Pour cette tâche, prenez des captures d'écran de :
 
 ```
 Conclusions :
+
+En analysant les headers du message nous pouvons voir que le premier hop est fait depuis notre addresse locale vers l'ip du container docker. Suivi d'un hop directe depuis l'adresse privé de ma machine vers un serveur mail de l'école.
+```
+
+![Mail headers](images/mail-headers.png)
+
+```
+On peut donc en conclure que la personne qui à envoyé le mail est dans le réseau locale et on peut meme savoir qui c'est grace à son ip. Il est donc favorable de ne pas être dans le meme réseau que le serveur mail cible pour se cacher.
+
+On peut aussi voir le niveau de spam detecté par le serveur mail:
+
+X-Barracuda-Spam-Score: 2.60
+X-Barracuda-Spam-Status: No, SCORE=2.60 using global scores of TAG_LEVEL=1000.0 QUARANTINE_LEVEL=4.0 KILL_LEVEL=5.0 tests=FROM_EXCESS_BASE64, FROM_EXCESS_BASE64_2, MISSING_DATE, MISSING_MID, MISSING_MIMEOLE
+
+Un score de 4.0 met le mail en quarantaine et un score de 5.0 ne laisse pas passer le mail. Notre score de 2.6 passe sans problème le filtre spam de l'ếcole.
 ```
 ---
 
