@@ -103,6 +103,8 @@ Les options sont:
 - host => Add docker container network (ipv4 only)
 - network => Add all docker container networks (ipv4 only)
 - connected-networks => Add all connected docker networks (ipv4 only)
+
+Cette option permet de définir quels réseaux lier à notre machine ont le droit de se connecter au serveur mail.
 ```
 ---
 
