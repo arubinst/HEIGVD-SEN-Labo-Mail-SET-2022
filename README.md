@@ -180,7 +180,9 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
 
-![config_client.png](images/config_client.png)
+![config_client1.png](images/config_client1.png)
+
+![config_client2.png](images/config_client2.png)
 
 ---
 
