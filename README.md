@@ -354,6 +354,10 @@ Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
+![email header 1](images/email_header_1.png)
+
+![email header 2](images/email_header_2.png)
+
 ---
 #### Partagez avec nous vos conclusions.
 
