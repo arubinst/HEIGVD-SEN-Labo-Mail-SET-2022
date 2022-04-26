@@ -80,7 +80,8 @@ ENABLE_AMAVIS = 0
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
 ```
-Réponse : Cette fonctionnalité permets de désactiver AMAVIS. AMAVIS permet le filtrage des emails (spamms).
+Réponse : D'après la [documentation mailserver](https://docker-mailserver.github.io/docker-mailserver/edge/config/environment/#enable_amavis) il s'agirait d'un filtre anti-spam pour emails. Amavis se place entre un agent de transferts de messages (MTA) et un service de filtre de contenu. 
+Cette option désactive Amavis. Dans la mesure où on ne configure pas le réception d'email, il n'y a que peu d'utilité à avoir un service de filtre.
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -93,10 +94,10 @@ PERMIT_DOCKER=connected-networks
 
 ```
 Réponse : Les différentes options ->
- - none : Force l'authentification
- - container : N'accèpte que l'IP du container
- - network : Ajoute le pont réseau de docker par défaut (172.16.0.0/12)
- - connected-networks : Ajoute tous les réseaux connectés de Docker (mais seulement en ipv4)
+ - **none** : Force l'authentification
+ - **container** : N'accèpte que l'IP du container
+ - **network** : Ajoute le pont réseau de docker par défaut (172.16.0.0/12)
+ - connected-networks** : Ajoute tous les réseaux connectés de Docker (mais seulement en ipv4)
 
 PERMIT_DOCKER permets de configurer le réseau pour fonctionner avec Docker.
 ```
