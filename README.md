@@ -327,7 +327,7 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture : Oui, l'email c'est fait filtrer et déplacer dans les spam par Gmail.
+Réponse et capture : Oui, l'email c'est fait filtrer et déplacer dans les spam par Gmail 🥲
 ```
 
 ![gmail spamm](images/gmail_spam.png)
@@ -363,7 +363,9 @@ Pour cette tâche, prenez des captures d'écran de :
 #### Partagez avec nous vos conclusions.
 
 ```
-Conclusions :
+Conclusions : 
+
+Malgré quelques problèmes de configurations sur Windows et MacOS (puce M1), qui a nécessité pas mal de bidouillage, nous sommes surpris par la facilité qu’il y a pour créer un serveur mail. Pourtant omniprésents et considérés comme une source sûre, les mails sont pourtant aussi sécurisés qu’une Bentley dont on aurait les fenêtres ouvertes dans le Bronks. N’importe qui peut se faire passer pour n’importe qui, et il est facile de mettre en place une compagne de phising en se faisant passer pour le service des impôts, qui envoient un mail pour aider une retraitée à se faire rembourser son surplus payé. 
 ```
 ---
 
