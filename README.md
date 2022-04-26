@@ -80,7 +80,7 @@ ENABLE_AMAVIS = 0
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
 ```
-Réponse :
+Réponse : interface entre le mailer et les content checkers: un scanner de virus (ClamAV)ou un filtre de spam (SpamAssasin)
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -92,7 +92,14 @@ PERMIT_DOCKER=connected-networks
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
 ```
-Réponse :
+Réponse : Elle permet de définir depuis quels réseaux les mails peuvent être envoyés.
+        
+Il y a cinq options possibles:
+ none => Explicitly force authentication
+ container => Container IP address only
+ host => Add docker container network (ipv4 only)
+ network => Add all docker container networks (ipv4 only)
+ connected-networks => Add all connected docker networks (ipv4 only)
 ```
 ---
 
@@ -129,6 +136,15 @@ Connection to localhost port 25 [tcp/smtp] succeeded!
 220 mail.whitehouse.gov ESMTP
 ```
 
+```bash
+lucas@lucas-ThinkPad-T480:~/.../mailserver$ telnet localhost 25
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+220 mail.lucasmail.com ESMTP
+```
+
+
 Dans mon cas, j'ai configuré le domaine de mon serveur avec ```whitehouse.gov```
 
 Vous pouvez ensuite établir une conversation avec votre serveur. Nous allons en particulier nous authentifier. Si vous ne vous authentifiez pas, le serveur refusera de vous laisser l'utiliser comme un relay (Relay access denied).
@@ -159,6 +175,7 @@ cGFzc3dvcmQ=                <----- "password" en base64
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
 
+![](.README_images/32104c6a.png)
 ---
 
 ### Configuration de votre client mail
@@ -175,6 +192,9 @@ Livrable : capture de votre configuration du serveur SMTP sur un client mail de 
 
 ---
 
+Utilisation de Mozilla Thunderbird comme client mail 
+
+![](.README_images/configthunderbird.png)
 Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails. Envoyez-vous un email à votre adresse de l'école pour le tester.
 
 Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilisant votre serveur. Puisque vous avez certainement créé un faux compte email, n'oubliez pas de signer le message avec votre vraie nom pour nous permettre de vous identifier.
@@ -184,6 +204,8 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
 ---
+
+![](.README_images/email_sent.png)
 
 ## The Social-Engineer Toolkit (SET)
 
@@ -264,6 +286,13 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
 ---
+Postfinance:
+
+![](.README_images/postfinance.png)
+
+Gaps:
+
+![](.README_images/b8a7e826.png)
 
 ### Mass Mailer Attack
 
@@ -296,6 +325,9 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 ```
 Réponse :
 ```
+Pas de filtrage
+
+![](.README_images/93c26423.png)
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
 
@@ -306,6 +338,10 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 Réponse et capture :
 ```
 ---
+
+Mon mail s'est retrouvé dans les spams
+
+![](.README_images/151d7ec5.png)
 
 ### Explorer les liens "Phishy" et le courrier électronique "Phishy"
 
@@ -329,10 +365,17 @@ Pour cette tâche, prenez des captures d'écran de :
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
 ---
+
+![](.README_images/5d087058.png)
+
+On peut voir le vrai serveur mail depuis lequel l'email a été envoyé ainsi que son IP.
+
+Il y a même l'information du dhcp de mon provider internet *voenergies.net*
+
 #### Partagez avec nous vos conclusions.
 
 ```
-Conclusions :
+Conclusions : Il à l'air assez facile de duper un utilisateur non averti. Je n'avais personellement jamais utilisé l'option d'afficher le contenu original du mail pour avoir toutes les informations du header.
 ```
 ---
 
