@@ -330,6 +330,7 @@ Réponse et capture : Oui, l'email c'est fait filtrer et déplacer dans les spam
 ```
 
 ![gmail spamm](images/gmail_spam.png)
+
 ---
 
 ### Explorer les liens "Phishy" et le courrier électronique "Phishy"
