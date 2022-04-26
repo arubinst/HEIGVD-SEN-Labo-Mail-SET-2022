@@ -194,6 +194,8 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
+
+![email.png](images/email.png)
 ---
 
 ## The Social-Engineer Toolkit (SET) 
@@ -274,6 +276,10 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
+![postfinance](images/webharvester_postfinance.png)
+
+![gaps](images/webharvester_gaps.png)
+
 ---
 
 ### Mass Mailer Attack
@@ -305,7 +311,13 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
 ```
-Réponse :
+Réponse : Oui, mon email c'est fait filter. Les raisons suivantes sont données:
+ - Missing message-Id: header
+ - From: base64 encoded unnecessarily
+ - From: base64 encoded unnecessarily
+ - Missing Date: header
+ - Delivered to trusted network by host with dynamic-loking rDNS
+ - Custom Rule MJ1963
 ```
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question. 
@@ -314,8 +326,10 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture :
+Réponse et capture : Oui, l'email c'est fait filtrer et déplacer dans les spam par Gmail.
 ```
+
+![gmail spamm](images/gmail_spam.png)
 ---
 
 ### Explorer les liens "Phishy" et le courrier électronique "Phishy"
