@@ -80,7 +80,7 @@ ENABLE_AMAVIS = 0
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
 ```
-Réponse :
+Réponse : Amavis permet de filtrer le contenu des mails. Cela donne une protection contre le spam, les virus et d'autres types de malwares
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -93,6 +93,14 @@ PERMIT_DOCKER=connected-networks
 
 ```
 Réponse :
+Cette variable permet de mettre en place les réseaux avec lequel le container va entrer en contact
+
+Options (documentation reprise du fichier de configuration) : 
+none => Explicitly force authentication
+container => Container IP address only
+host => Add docker container network (ipv4 only)
+network => Add all docker container networks (ipv4 only)
+connected-networks => Add all connected docker networks (ipv4 only)
 ```
 ---
 
@@ -159,6 +167,12 @@ cGFzc3dvcmQ=                <----- "password" en base64
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
 
+![Auth](images/auth.png)
+
+Mon nom d'utilisateur est `gilbert@tropiques.sol`
+
+Le mot de passe est `gilou`
+
 ---
 
 ### Configuration de votre client mail
@@ -173,16 +187,28 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
 
+Il a tout d'abord fallu ajouter le nom de domaine `tropiques.sol` au fichier `/etc/hosts`
+
+![Hosts](images/hosts.png)
+
+La configuration suivante a été effectuée sur le client mail [thunderbird](https://www.thunderbird.net/fr/) : 
+
+![Conf](images/config.png)
+
 ---
 
 Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails. Envoyez-vous un email à votre adresse de l'école pour le tester.
 
-Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilisant votre serveur. Puisque vous avez certainement créé un faux compte email, n'oubliez pas de signer le message avec votre vraie nom pour nous permettre de vous identifier.
+Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilisant votre serveur. Puisque vous avez certainement créé un faux compte email, n'oubliez pas de signer le message avec votre vraie nom pour nous permettre de vous identifier.Livra
 
 ---
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
+Voici le mail envoyé :
+
+![Mail](images/mail.png)
+
 ---
 
 ## The Social-Engineer Toolkit (SET)
@@ -263,6 +289,22 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
+
+
+Les informations de login se trouvent en rouge en bas des screenshots.
+
+Postfinance :
+
+![Menu principal SET](images/post.png)
+
+Gaps :
+
+![Menu principal SET](images/gaps.png)
+
+Cette attaque fonctionne également pour spotify avec le lien suivant : `https://accounts.spotify.com/en/login/?continue=https%3A//open.spotify.com/__noul__%3Fl2l%3D1%26nd%3D1&_locale=de-DE`
+
+![Menu principal SET](images/spotify.png)
+
 ---
 
 ### Mass Mailer Attack
@@ -294,8 +336,12 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
 ```
-Réponse :
+Réponse : Non je l'ai bien reçu dans ma boîte mail : 
 ```
+
+Mail :
+
+![Menu principal SET](images/spam1.png)
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
 
@@ -303,8 +349,10 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture :
+Réponse et capture : J'ai bien reçu l'email dans ma boîte personnelle, mais il a été détecté comme spam par gmail :
 ```
+![Menu principal SET](images/spam_2.png)
+
 ---
 
 ### Explorer les liens "Phishy" et le courrier électronique "Phishy"
