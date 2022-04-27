@@ -158,6 +158,7 @@ cGFzc3dvcmQ=                <----- "password" en base64
 ```
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
+![SEN_auth_sucess](https://user-images.githubusercontent.com/79631500/165636134-ff4e42ae-9b9b-43bc-8b8f-5f55c7b46cf0.png)
 
 ---
 
@@ -172,6 +173,9 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 ```
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
+![SEN_config3](https://user-images.githubusercontent.com/79631500/165636075-c48154e8-2c9c-495a-9a88-9356203d2d04.png)
+
+![SEN_config2](https://user-images.githubusercontent.com/79631500/165636096-c7d6da8a-aa24-4b6c-ade0-8b94045f9dc8.png)
 
 ---
 
@@ -184,6 +188,8 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
 ---
+![SEN_mail_send](https://user-images.githubusercontent.com/79631500/165636038-f2b89909-fe3f-4379-9565-b3caa7c04a88.png)
+
 
 ## The Social-Engineer Toolkit (SET)
 
