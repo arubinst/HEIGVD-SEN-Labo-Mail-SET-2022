@@ -81,6 +81,7 @@ ENABLE_AMAVIS = 0
 
 ```
 Réponse :
+Amavis is an open-source content filter for electronic mail, implementing mail message transfer, decoding, some processing and checking, and interfacing with external content filters to provide protection against spam and viruses and other malware. It can be considered an interface
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -93,6 +94,11 @@ PERMIT_DOCKER=connected-networks
 
 ```
 Réponse :
+# none => Explicitly force authentication
+# container => Container IP address only
+# host => Add docker container network (ipv4 only)
+# network => Add all docker container networks (ipv4 only)
+# connected-networks => Add all connected docker networks (ipv4 only)
 ```
 ---
 
@@ -154,11 +160,13 @@ cGFzc3dvcmQ=                <----- "password" en base64
 ---
 
 #### Faire une capture de votre authentification auprès de votre serveur mail
-
+bWFudUBsYWJvLXNlbi5jb20=
 ```
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
+> authentication successfull
 
+![Authentication successfull](images/authentication%20successfull.png)
 ---
 
 ### Configuration de votre client mail
@@ -172,6 +180,12 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 ```
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
+> Client mail
+
+![outgoing smtp](images/config_smtp.png)
+
+![imap smtp](images/config_imap.png)
+
 
 ---
 
@@ -183,6 +197,9 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
+![Client mail](images/erreur.png)
+
+Impossible d'envoyer des mails
 ---
 
 ## The Social-Engineer Toolkit (SET)
@@ -263,8 +280,20 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
+> postfinance
+
+![postfinance](images/clone_poste.png)
 ---
 
+> gaps
+
+![gaps](images/clone_gaps.png)
+
+> facebook
+
+![facebook](images/clone_facebook.png)
+
+---
 ### Mass Mailer Attack
 
 Essayez la fonction d'envoie de mails. Vous la trouvez dans "Social Engineering Attacks".
