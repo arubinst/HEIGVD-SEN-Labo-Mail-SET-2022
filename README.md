@@ -80,7 +80,9 @@ ENABLE_AMAVIS = 0
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
 ```
-Réponse :
+Réponse : 
+Amavis est un filtre de contenu pour les mail qui est utilisé par les antivirus, anti spam...
+Cette option dit qu'on ne veut pas utiliser/activer Amavis.
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -93,6 +95,8 @@ PERMIT_DOCKER=connected-networks
 
 ```
 Réponse :
+Options: none, container, host, network, connected-network
+Cette option nous permet de définir sur quel réseau le conteneur peut communiquer.
 ```
 ---
 
@@ -155,6 +159,8 @@ cGFzc3dvcmQ=                <----- "password" en base64
 
 #### Faire une capture de votre authentification auprès de votre serveur mail
 
+<img src="images/rendu/srv-auth.png" style="border:1px solid grey;zoom:100%;" />
+
 ```
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
@@ -169,6 +175,16 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 
 ### Montrez-nous votre configuration à l'aide d'une capture
 
+Configuration de Thundrbird:
+
+<img src="images/rendu/thb-imap-cnfig.png" style="border:1px solid grey;zoom:90%;" />
+
+<img src="images/rendu/thb-smtp-cnfig.png" style="border:1px solid grey;zoom:90%;" />
+
+Configuration des nom d'hôtes:
+
+<img src="images/rendu/hosts.png" style="border:1px solid grey;zoom:100%;" />
+
 ```
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
@@ -180,6 +196,8 @@ Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails.
 Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilisant votre serveur. Puisque vous avez certainement créé un faux compte email, n'oubliez pas de signer le message avec votre vraie nom pour nous permettre de vous identifier.
 
 ---
+<img src="images/rendu/mail.png" style="border:1px solid grey;zoom:100%;" />
+
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
@@ -261,6 +279,24 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 #### Soumettre des captures d'écran
 
+Postfinance:
+
+![](images/rendu/postfinance.png)
+
+![](images/rendu/postfinance-login.png)
+
+
+
+Gaps:
+
+Nous voyons ci-dessous, qu'aucun login n'a été capturé, alors que je suis bien logguée.
+
+![](images/rendu/gaps.png)
+
+J'ai testé sur d'autres sites sans succès (commune montreux, cinerive, intranet VMCV...).
+
+
+
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
 ---
@@ -294,16 +330,32 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
 ```
-Réponse :
+Réponse : Le mail envoyé depuis le réseau de l'école est passé, mais pas celui envoyé en connexion 4G.
+La raison en est la source du message qui est connue, et considérée comme fiable dans un cas, et pas dans l'autre.
+Pour les deux mails le score du spam filter est en dessous de la limite pour la mise en quarantaine. (2.6 et 3.2, limite à 4).
 ```
+
+Source du mail validé:
+````
+Received: from mail.riotgames.com ([10.192.106.144]) by mail01.heig-vd.ch with ESMTP id H2SXRDUL1EQjU56U for <maude.issolah@heig-vd.ch>; Thu, 07 Apr 2022 11:30:58 +0200 (CEST)
+X-Barracuda-Envelope-From: dieu@paradis.com
+X-Barracuda-RBL-Trusted-Forwarder: 10.192.106.144
+(...)
+X-Barracuda-Spam-Score: 2.60
+X-Barracuda-Spam-Status: No, SCORE=2.60 using global scores of TAG_LEVEL=1000.0 QUARANTINE_LEVEL=4.0 KILL_LEVEL=5.0
+````
+
+
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question. 
 
 ---
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
+![](images/rendu/mail-quarantaine.png)
+
 ```
-Réponse et capture :
+Réponse et capture : Cette fois la source est inconnue
 ```
 ---
 
@@ -328,11 +380,62 @@ Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
+
+
+Analyse d'un spam reçu sur un de mes mails privé.
+
+![](images/rendu/analyse-1.png)
+
+Le `From` laisse penser que le mail vient de SFR, et il est écrit a moitié en français et à moitié en allemand avec une mise en forme de l'adresse qui n'est pas habituelle.
+
+Le `Message-ID` nous montre que le mail vient d'une app Java.
+
+Et la date est dans le futur...
+
+
+
+![](images/rendu/analyse-2.png)
+
+On peut observer qu'il s'est passé quatre jours avant que ce spam n'arrive dans ma boîte spam.
+
+De plus il n'est possible de suivre le trajet du mail que jusqu'à l'avant dernier transfert, où là, je ne comprends pas ce qu'il s'est passé.
+
+
+
+Dans le détail de l'entête on voit que les deux premiers mouvement du mail se font sur des IP privée, avec pour le 1e mouvement le nom d'hôte présent dans le message ID `app09-ddm-pr.phys.prod`.
+
+````
+Received: from su14875.enodios ([10.24.2.105])	by prcmxdzc04.case.sfr.fr
+Received: from app09-ddm-pr.phys.prod (sa14944fct0.phys.prod [10.24.54.5])
+````
+
+
+
+Les IPs liées aux adresses *sfr* sont située en France, et semble bien appartenir à cette entreprise, par contre la dernière IP est située aux USA .
+
+Le `.nl` laisse penser que c'est une adresse des Pays-Bas, alors que toutes les infos s'y rapportant montre que ce domaine est aux USA.
+
+![](images/rendu/nl.png)
+
+
+
+L'adresse de retour dans l'entête n'est pas la même que celle de l’émetteur affichée dans les informations du mail.
+
+```
+Return-Path: <egakpaa6n4hgsmnsfn@cgaux.org>
+From: Danke<ne_pas_repondre@sfr.fr>
+```
+
+
+
+Toutes les informations ci-dessus montre sans aucun doute que ce mail est frauduleux.
+
 ---
 #### Partagez avec nous vos conclusions.
 
 ```
-Conclusions :
+Conclusions : Détecter un mail frauduleux est plus compliqué que juste lire l'adresse de retour donnée par notre logiciel de mail, et n'est pas à la portée de tout le monde. 
+Les techniques de phishing sont de plus en plus évoluée, et il est bien d'avoir des outils de detection automatiques
 ```
 ---
 
