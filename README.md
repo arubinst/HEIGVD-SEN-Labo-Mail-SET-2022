@@ -357,6 +357,19 @@ Pour cette tâche, prenez des captures d'écran de :
 
 ![email header](images/email_header.png)
 
+2. Le serveur de réçeption semble utiliser le service [barracuda](https://www.barracuda.com/products/emailsecuritygateway) pour la protection contre les spams.
+
+3. Nous notons également qu’un «  X-Barracuda-Spam-Score» indique la probabilité que l’email reçu soit un spam. 1 ayant peu de chance d’être un spam et 10 définitivement un spam. Nous obtenons un résultat de **3.20**. 
+En fonction du score, l'email sera remis au destinataire de la manière suivante : 
+```
+0.0 – 2.99 –> Déliveré dans la boîte de réçeption.
+3.0 – 4.99 –> Déliveré dans la boîte de réçeption, avec un tag "email suspect".
+5.0 – 6.99 –> Email mis en quarantaine.
+7.0 – 10.0 –> Email bloqué.
+```
+Le header détaille également comment les points ont été calculés, pouvant nous aider à envoyer un email moins suspect. Notons que `MISSING_DATE` nous fait prendre 1.4 au score, ce qui ne devrait pas poser beaucoup de problèmes à corriger. Il en est de même pour `FROM_EXCESS_BASE64` qui serait un encodage base64 inutile.
+
+
 ---
 #### Partagez avec nous vos conclusions.
 
