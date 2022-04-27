@@ -357,6 +357,11 @@ Pour cette tâche, prenez des captures d'écran de :
 
 ![email header](images/email_header.png)
 
+ 1. Les différentes informations qui se trouvent dans ces headers montre le chemin emprunté par le mail pour atteindre sa destination.
+ 2.
+ 3.
+ 4. Il est intéressant de noter que le `Return-Path` est spécifié. Généralement, un email de spam ne souhaiterait pas recevoir en retour un email pour chaque destinataire qui n'a pas pu être atteint.
+
 ---
 #### Partagez avec nous vos conclusions.
 
