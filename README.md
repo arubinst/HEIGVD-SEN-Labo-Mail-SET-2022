@@ -1,5 +1,6 @@
 # Teaching-HEIGVD-SEN-2022-Laboratoire-Docker-Mail et SET
 
+Auteur : Axel Vallon
 
 ## Introduction
 
@@ -81,6 +82,10 @@ ENABLE_AMAVIS = 0
 
 ```
 Réponse :
+# Amavis content filter (used for ClamAV & SpamAssassin)
+# 0 => Disabled
+# 1 => Enabled
+ENABLE_AMAVIS=0
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -92,7 +97,21 @@ PERMIT_DOCKER=connected-networks
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
 ```
-Réponse :
+Réponse : Copie de la doc.
+Set different options for mynetworks option (can be overwrite in postfix-main.cf)
+# **WARNING**: Adding the docker network's gateway to the list of trusted hosts, e.g. using the `network` or
+# `connected-networks` option, can create an open relay
+# https://github.com/docker-mailserver/docker-mailserver/issues/1405#issuecomment-590106498
+# The same can happen for rootless podman. To prevent this, set the value to "none" or configure slirp4netns
+# https://github.com/docker-mailserver/docker-mailserver/issues/2377
+#
+# none => Explicitly force authentication
+# container => Container IP address only
+# host => Add docker container network (ipv4 only)
+# network => Add all docker container networks (ipv4 only)
+# connected-networks => Add all connected docker networks (ipv4 only)
+
+Il s'agit donc de la mise en réseau possible avec des containers. Ils existe différents topologies pour connecter des conteneurs entre eux. En fonction de la topologie, on pourra contacter le containeur de différentes manière, ou pas pouvoir le contacter. Il sera possible qu'ils fassent parti du même réseau etc...
 ```
 ---
 
@@ -155,9 +174,9 @@ cGFzc3dvcmQ=                <----- "password" en base64
 
 #### Faire une capture de votre authentification auprès de votre serveur mail
 
-```
-Livrable : capture de votre conversation/authentification avec le serveur
-```
+![image-20220407134524045](figures/image-20220407134524045.png)
+
+
 
 ---
 
@@ -173,6 +192,10 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
 
+Serveur de sortie
+
+![image-20220407164420213](figures/image-20220407164420213.png)
+
 ---
 
 Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails. Envoyez-vous un email à votre adresse de l'école pour le tester.
@@ -183,6 +206,8 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
+![image-20220407165128470](figures/image-20220407165128470.png)
+
 ---
 
 ## The Social-Engineer Toolkit (SET)
@@ -263,6 +288,24 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
+**Gaps**
+
+![image-20220407171158234](figures/image-20220407171158234.png)
+
+**La Poste**
+
+![image-20220407171759477](figures/image-20220407171759477.png)
+
+Le mot de passe a été concaténé. Le css était cependant cassé.
+
+**Moodle**
+
+N'a pas fonctionné, la page de la poste est restée. 
+
+**Webmail**
+
+Idem
+
 ---
 
 ### Mass Mailer Attack
@@ -293,17 +336,68 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 ---
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
+Non, il n'a jamais été reçu sur ma boîte de l'école ni dans le filtre.
+
+![image-20220407173515707](figures/image-20220407173515707.png)
+
+Cependant il a bien été réceptionné sur ma boîte privée gmail.
+
+![image-20220407200810914](figures/image-20220407200810914.png)
+
+Par contre lors du premier exercice, le mail est arrivé dans le spam, et ait donc eu l'opportunité de voir les headers du mails
+
+![image-20220407163605492](figures/image-20220407163605492.png)
+
 ```
-Réponse :
+X-ASG-Debug-ID: 1649333808-1114bd34048dd660001-vWPJUw
+Received: from test.ch ([10.192.105.238]) by mail01.heig-vd.ch with ESMTP id auaCHsEl09GrcWkV for <axel.vallon@heig-vd.ch>; Thu, 07 Apr 2022 14:16:48 +0200 (CEST)
+X-Barracuda-Envelope-From: axel.vallon@test.ch
+X-Barracuda-RBL-Trusted-Forwarder: 10.192.105.238
+Received: from LAPTOP-1ER0GN1F (unknown [172.19.0.1])
+	by test.ch (Postfix) with ESMTPA id 1BF7665D1B
+	for <axel.vallon@heig-vd.ch>; Thu,  7 Apr 2022 14:16:49 +0200 (CEST)
+MIME-Version: 1.0
+X-Barracuda-RBL-Trusted-Forwarder: 172.19.0.1
+X-Barracuda-BBL-Trusted-Forwarder: 172.19.0.1
+From: axel.vallon@test.ch
+To: axel.vallon@heig-vd.ch
+Date: 7 Apr 2022 14:16:49 +0200
+Subject: Test
+Content-Type: text/plain; charset=us-ascii
+X-ASG-Orig-Subj: Test
+Content-Transfer-Encoding: quoted-printable
+X-Barracuda-Connect: UNKNOWN[10.192.105.238]
+X-Barracuda-Start-Time: 1649333808
+X-Barracuda-URL: https://quarantine.heig-vd.ch:443/cgi-mod/mark.cgi
+X-Virus-Scanned: by bsmtpd at heig-vd.ch
+X-Barracuda-Scan-Msg-Size: 9
+X-Barracuda-Envelope-From: axel.vallon@test.ch
+X-Barracuda-Quarantine-Per-User: PER_USER
+X-Barracuda-Spam-Score: 4.14
+X-Barracuda-Spam-Status: Yes, SCORE=4.14 using global scores of TAG_LEVEL=1000.0 QUARANTINE_LEVEL=4.0 KILL_LEVEL=5.0 tests=MISSING_MID, NO_REAL_NAME, URLBL_FROM_BC
+X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.97186
+	Rule breakdown below
+	 pts rule name              description
+	---- ---------------------- --------------------------------------------------
+	0.14 MISSING_MID            Missing Message-Id: header
+	0.00 NO_REAL_NAME           From: does not include a real name
+	4.00 URLBL_FROM_BC          URLBL_FROM_BC
+	                           [URL: test.ch]
+
+Salut
 ```
 
-Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
+Les headers donnent des information que cet email a bien été traité, et le score principalement.
+
+Deuxièmement, le tableau du bas montre que la plupart des point obtenu viennent de "Barracuda Reputation Block List (BRBL)" qui se base sur une liste d'IP réputée pour envoyer du spam.
 
 ---
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture :
+Réponse et capture : Je ne peux pas répondre à cette question, vu que je ne l'ai jamais reçu via setoolkit mais seulement via thunderbird. Je suppose que le score du mail était trop élevé et que Barracuda l'a blocké. Il faudrait modifier la configuration de Barracuda pour y avoir accès
+
+Source: https://campus.barracuda.com/product/emailsecuritygateway/knowledgebase/50160000000IAJ7AAO/How+is+the+spam+score+calculated+and+emails+categorized+on+my+Barracuda+Spam+Firewall%3F/
 ```
 ---
 
@@ -328,14 +422,41 @@ Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
+![image-20220427182920404](figures/image-20220427182920404.png)
+
+Received : 
+
+![image-20220427183055140](figures/image-20220427183055140.png)
+
+La on a plus d'info. On voit que github a envoyé un mail. Comme on est sur du web-based, on a des infos pas trop utile pour nous en plus.
+
+SI on regarde le domain name, soit out-25.smtp.github.com, cela semble tout à faire correct. On sait que ce serveur appartient à github en lisant depuis la droite.
+
+En vérifiant l'adresse IP sur https://network-tools.com/, on voit que c'est ok.
+
+![image-20220427183609290](figures/image-20220427183609290.png)
+
+![image-20220427222656047](figures/image-20220427222656047.png)
+
+On voit que aucun des critère de spam n'est présent dans cet email, car aucuns header mentionné dans l'article n'est présent.
+
 ---
 #### Partagez avec nous vos conclusions.
 
 ```
 Conclusions :
+
+Lecture : La lecture était vraiment intéressante. J'ai personnellement appris certaines choses sur les URLs. 
+
+SET : Les outils cependant sont effectivement vieillissant. Si je devais par exemple cloner un site, je le ferais sur Gophish, qui est beaucoup plus puissant et logique.
+Mais un approfondissement de ce qui est disponible sur SET serait intéressant. Après on a plus vite fait de coder ça à la main des fois, pour avoir un résultat adapté à ce qu'on cherche.
+
+Remarque sur le projet : 
+- Le serveur mail ne fonctionne pas sur Windows. Vous avez mentionné que peut-être Docker mailserveur fonctionne sur Windows, mais il est mentionné sur leur doc que non, et après beaucoup d'essai, ça ne fonctionne pas. Je pense que vous pouvez rediriger les étudiants vers WSL avec le Docker partagé depuis Windows.
+- Je conseillerais l'utilisation de ngrok au lieu de modifier la configuration du routeur.
 ```
 ---
 
 ## Echeance
 
-Le 14 avril 2022 à 10h25
+Le 28 avril 2022 à 10h25
