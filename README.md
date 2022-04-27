@@ -80,7 +80,7 @@ ENABLE_AMAVIS = 0
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
 ```
-Réponse :
+Réponse : Selon wikipedia, amavis est un filtre de contenu open source destiné aux emails. Il implément le transfert de message, le decodage, du processing et de la verification. En s'associant avec des filtres externes, il protège contre les spams, les virus ou les malwares.
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -92,7 +92,13 @@ PERMIT_DOCKER=connected-networks
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
 ```
-Réponse :
+Réponse : Elle permette de définir le réseau qui sera utiliser par mailserver pour envoyer des mails:
+
+- none : Explicitly force authentication
+- container => Container IP address only
+- host => Add docker container network (ipv4 only)
+- network => Add all docker container networks (ipv4 only)
+- connected-networks => Add all connected docker networks (ipv4 only)
 ```
 ---
 
@@ -105,6 +111,10 @@ La dernière partie de la configuration c'est la création d'un compte que vous 
 ```
 
 Où ```vladimir@putin.ru```  c'est l'adresse email et le nom d'utilisateur qui seront crées et ```password``` est le mot de passe correspondant.
+
+**Capture: **
+
+![image-20220427170638839](README.assets/image-20220427170638839.png)
 
 ### Installation et test
 
@@ -128,6 +138,10 @@ Si votre serveur fonctionne correctement, il devrait vous saluer avec :
 Connection to localhost port 25 [tcp/smtp] succeeded!
 220 mail.whitehouse.gov ESMTP
 ```
+
+**Capture:**
+
+![image-20220427170531779](README.assets/image-20220427170531779.png)
 
 Dans mon cas, j'ai configuré le domaine de mon serveur avec ```whitehouse.gov```
 
@@ -159,6 +173,8 @@ cGFzc3dvcmQ=                <----- "password" en base64
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
 
+![image-20220427171018013](README.assets/image-20220427171018013.png)
+
 ---
 
 ### Configuration de votre client mail
@@ -173,6 +189,8 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
 
+![image-20220427171448201](README.assets/image-20220427171448201.png)
+
 ---
 
 Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails. Envoyez-vous un email à votre adresse de l'école pour le tester.
@@ -183,6 +201,12 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
+![image-20220427173629962](README.assets/image-20220427173629962.png)
+
+J'ai eu l'erreur suivante, toutefois j'ai une autre adresse mail que je peux tester et où cela a fonctionné:
+
+![image-20220427173849424](README.assets/image-20220427173849424.png)
+
 ---
 
 ## The Social-Engineer Toolkit (SET)
@@ -254,7 +278,7 @@ Certains sites ne fonctionnent pas bien, voir pas du tout. Pour ces cas, il exis
 
 On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essayer. On avait déjà mentionné Postfinance. L'autre site, c'est notre cher et vénérable gaps :
 
-- ```https://www.postfinance.ch/ap/ba/ob/html/finance/home?login```
+- https://www.postfinance.ch/ap/ba/ob/html/finance/home?login
 - ```https://gaps.heig-vd.ch/consultation/```
 
 ---
@@ -262,6 +286,28 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 #### Soumettre des captures d'écran
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
+
+**PostFinance**
+
+![image-20220427175249773](README.assets/image-20220427175249773.png)
+
+**GAPS**
+
+![image-20220427175757661](README.assets/image-20220427175757661.png)
+
+**auth.Blek.ch**
+
+![image-20220427175939221](README.assets/image-20220427175939221.png)
+
+Remarque: la copie du site a été bancale puisque des caractères spéciaux s'y sont insérés, voici la comparaison:
+
+**Original: **
+
+![image-20220427180032984](README.assets/image-20220427180032984.png)
+
+**Copie: **
+
+![image-20220427180143112](README.assets/image-20220427180143112.png)
 
 ---
 
@@ -293,8 +339,16 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 ---
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
+**La configuration:**
+
+![image-20220427182740062](README.assets/image-20220427182740062.png)
+
+**Le mail recu:**
+
+Je n'ai rien recu malheureusement.
+
 ```
-Réponse :
+Réponse : 
 ```
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
@@ -302,8 +356,16 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 ---
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
+**La configuration: **
+
+![image-20220427182129260](README.assets/image-20220427182129260.png)
+
+**Le mail recu: **
+
+![image-20220427182149661](README.assets/image-20220427182149661.png)
+
 ```
-Réponse et capture :
+Réponse et capture : J'ai envoyé mon mail sur lev.pozniakoff@balelec.ch et il a été filtré, ceci est dû à la répétition d'un filtrage manuel que j'avais effectué par le passé et que gmail a conservé en mémoire. Je l'ai donc retrouvé dans mes spams.
 ```
 ---
 
@@ -331,8 +393,15 @@ Pour cette tâche, prenez des captures d'écran de :
 ---
 #### Partagez avec nous vos conclusions.
 
+**Le mail brut envoyé sur mon adresse privée: **
+
+![image-20220427183206495](README.assets/image-20220427183206495.png)
+
 ```
 Conclusions :
+Nous pouvons voir que le mail part de notre serveur local, puis fait un saut par mx.google.com avant d'arrive lev.pozniakoff@balelec.ch.
+
+Il recoit un spf (Sender Policy Framework) neutre, ceci indique que le propriétaire de ce domaine ne veut pas assumer le fait que cette adresse IP est authorisé à envoyer depuis ce domaine (heig-vd.ch). C'est probablement pour cela que je n'ai pas réussi à envoyer un mail aux adresse @heig-vd.ch.
 ```
 ---
 
