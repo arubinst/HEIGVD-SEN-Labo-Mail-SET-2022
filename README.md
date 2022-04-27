@@ -309,11 +309,11 @@ Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites p
 
 #### CFF
 
-![cff](.\assets\cff.PNG)
+![cff](./assets/cff.PNG)
 
 
 
-![cff-cred](.\assets\cff-cred.PNG)
+![cff-cred](./assets/cff-cred.PNG)
 
 ### Mass Mailer Attack
 
@@ -382,18 +382,23 @@ Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
-![email-headers](.\assets\email-headers.PNG)
+![email-headers](./assets/email-headers.PNG)
 On peut constater que les champs SPF, DKIM et DMARC sont marqué comme PASS.
-Avec SPF, le PASS certifie que l'adresse IP a le droit d'envoyer des emails. L'adresse IP testée est celle de MAIL FROM. SPF ne garantit pas que la partie à gauche du signe @ est authentique
-Avec DKIM, PASS signifie que la signature du nom de domaine correspond à la clé publique de maltego.com
 
-DMARC est noté aussi à PASS, cela signifie que les noms de domaines correspondent, en plus que les validations SPF et DKIM soient à PASS (DMARC permet de définir des politiques en cas de FAIL)
+- Avec SPF, le PASS certifie que l'adresse IP a le droit d'envoyer des emails. L'adresse IP testée est celle de MAIL FROM. SPF ne garantit pas que la partie à gauche du signe @ est authentique
 
-On peut dèrs lors conclure que le mail semble valide et a bien été envoyé par marketing@maltego.com 
+- Avec DKIM, PASS signifie que la signature du nom de domaine correspond à la clé publique de maltego.com
 
-Source : https://help.sendinblue.com/hc/fr/articles/209577385-Comprendre-les-protocoles-SPF-DKIM-et-DMARC
-https://fr.wikipedia.org/wiki/Sender_Policy_Framework
-https://fr.wikipedia.org/wiki/DMARC
+- DMARC a aussi l'attribut à PASS, cela signifie que les noms de domaines correspondent, en plus que les validations SPF et DKIM soient à PASS (DMARC permet de définir des politiques en cas de FAIL).
+
+
+On peut dès lors conclure que le mail semble valide et a bien été envoyé par marketing@maltego.com 
+
+Source :
+
+- [https://help.sendinblue.com/hc/fr/articles/209577385-Comprendre-les-protocoles-SPF-DKIM-et-DMARC](https://help.sendinblue.com/hc/fr/articles/209577385-Comprendre-les-protocoles-SPF-DKIM-et-DMARC)
+- [https://fr.wikipedia.org/wiki/Sender_Policy_Framework](https://fr.wikipedia.org/wiki/Sender_Policy_Framework)
+- [https://fr.wikipedia.org/wiki/DMARC](https://fr.wikipedia.org/wiki/DMARC)
 
 ---
 
