@@ -185,6 +185,7 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
 ![](./images/smtp_server.png)
+<br>
 il faut savoir que j'ai rajouter ggconsultingsarl.ch dans les hosts de la machine sur 127.0.0.1
 ---
 
