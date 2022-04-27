@@ -279,6 +279,16 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
+![SEN_post](https://user-images.githubusercontent.com/79631500/165640614-5ff6160d-c2a2-4b17-9062-de203a612a9b.png)
+
+![SEN_fish1](https://user-images.githubusercontent.com/79631500/165640616-f07bf51b-0307-44ae-9f73-bbdb0513969b.png)
+
+
+
+![SEN_fish2](https://user-images.githubusercontent.com/79631500/165640557-2a3141a4-9c45-4228-a4ac-2d22d38e709a.png)
+
+![SEN_gaps](https://user-images.githubusercontent.com/79631500/165640543-5f1c5564-59f6-49d2-9816-ced6980353f0.png)
+
 ---
 
 ### Mass Mailer Attack
@@ -310,8 +320,12 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
 ```
-Réponse :
+Réponse : Non
+
 ```
+![SEN_ribbit](https://user-images.githubusercontent.com/79631500/165640466-9ea20edc-64a0-4c6c-9fd7-0d4b942b3796.png)
+
+![SEN_ribbit2](https://user-images.githubusercontent.com/79631500/165640487-66b5382d-a3b6-4af3-9ca7-3bed0fbab0d0.png)
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
 
@@ -319,7 +333,7 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture :
+Réponse et capture : le mail a été filtré
 ```
 ---
 
@@ -344,6 +358,65 @@ Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
+
+````bash
+Received: from EIMAIL01.einet.ad.eivd.ch (10.192.41.71) by
+ EIMAIL02.einet.ad.eivd.ch (10.192.41.72) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24 via Mailbox Transport; Thu, 28 Apr 2022 00:11:24 +0200
+Received: from EIMAIL01.einet.ad.eivd.ch (10.192.41.71) by
+ EIMAIL01.einet.ad.eivd.ch (10.192.41.71) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Thu, 28 Apr 2022 00:11:24 +0200
+Received: from mail01.heig-vd.ch (10.192.222.28) by EIMAIL01.einet.ad.eivd.ch
+ (10.192.41.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.24 via Frontend
+ Transport; Thu, 28 Apr 2022 00:11:24 +0200
+X-ASG-Debug-ID: 1651097483-1114bd502964900001-qYlf88
+Received: from mail.frog.com (adsl2574ge.worldcom.ch [83.172.207.44]) by mail01.heig-vd.ch with ESMTP id ydb3lRD6nwiEC8FK for <rebecca.tevaearai@heig-vd.ch>; Thu, 28 Apr 2022 00:11:24 +0200 (CEST)
+X-Barracuda-Envelope-From: frog@frog.com
+X-Barracuda-Effective-Source-IP: adsl2574ge.worldcom.ch[83.172.207.44]
+X-Barracuda-Apparent-Source-IP: 83.172.207.44
+Received: from [127.0.1.1] (unknown [172.20.0.1])
+	by mail.frog.com (Postfix) with ESMTPA id 47CEB440258
+	for <rebecca.tevaearai@heig-vd.ch>; Wed, 27 Apr 2022 17:54:01 -0400 (EDT)
+Content-Type: multipart/mixed;
+	boundary="===============8433096044196421829=="
+MIME-Version: 1.0
+From: =?utf-8?b?ZnJvZw==?= <frog@frog.com>
+To: <rebecca.tevaearai@heig-vd.ch>
+X-Priority: 1 (Highest)
+X-MSMail-Priority: High
+Subject: =?utf-8?b?cmliYml0?=
+X-Barracuda-Connect: adsl2574ge.worldcom.ch[83.172.207.44]
+X-Barracuda-Start-Time: 1651097483
+X-Barracuda-URL: https://quarantine.heig-vd.ch:443/cgi-mod/mark.cgi
+X-ASG-Orig-Subj: =?utf-8?b?cmliYml0?=
+X-Virus-Scanned: by bsmtpd at heig-vd.ch
+X-Barracuda-Scan-Msg-Size: 6
+X-Barracuda-Spam-Score: 2.60
+X-Barracuda-Spam-Status: No, SCORE=2.60 using global scores of TAG_LEVEL=1000.0 QUARANTINE_LEVEL=4.0 KILL_LEVEL=5.0 tests=FROM_EXCESS_BASE64, FROM_EXCESS_BASE64_2, HTML_MESSAGE, MIME_HTML_ONLY, MISSING_DATE, MISSING_MID, MISSING_MIMEOLE
+X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.97640
+	Rule breakdown below
+	 pts rule name              description
+	---- ---------------------- --------------------------------------------------
+	0.00 MIME_HTML_ONLY         BODY: Message only has text/html MIME parts
+	0.14 MISSING_MID            Missing Message-Id: header
+	0.00 HTML_MESSAGE           BODY: HTML included in message
+	0.00 MISSING_MIMEOLE        Message has X-MSMail-Priority, but no X-MimeOLE
+	0.01 FROM_EXCESS_BASE64     From: base64 encoded unnecessarily
+	1.05 FROM_EXCESS_BASE64_2   From: base64 encoded unnecessarily
+	1.40 MISSING_DATE           Missing Date: header
+Message-ID: <99d0d410-5f35-4c3f-9afd-a4ec10f83776@EIMAIL01.einet.ad.eivd.ch>
+Return-Path: frog@frog.com
+Date: Thu, 28 Apr 2022 00:11:24 +0200
+X-MS-Exchange-Organization-Network-Message-Id: c63d6c29-6d7c-435c-9f57-08da289ade79
+X-MS-Exchange-Organization-AVStamp-Enterprise: 1.0
+X-MS-Exchange-Organization-AuthSource: EIMAIL01.einet.ad.eivd.ch
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:00.0798951
+X-MS-Exchange-Processed-By-BccFoldering: 15.01.2375.024
+```
 ---
 #### Partagez avec nous vos conclusions.
 
