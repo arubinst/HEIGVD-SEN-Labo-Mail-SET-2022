@@ -68,6 +68,14 @@ Finalement, nous allons rendre executable le script ```setup.sh```.
 chmod a+x ./setup.sh
 ```
 
+## NOTES MICHAEL RUCKSTUHL
+
+Puisqu'il est dit de faire des captures de chaques étapes, pour le moment tout se passe bien:
+
+![](images/downloads.png)
+
+## FIN NOTES MICHAEL RUCKSTUHL
+
 Le fichier ```mailserver.env```contient une énorme quantité de [variables d'environnement](https://docker-mailserver.github.io/docker-mailserver/edge/config/environment/) qui vous permettent de configurer votre serveur. La bonne nouvelle c'est que la configuration de base est déjà une version "clé en main". Vous pourriez ne rien modifier. Nous allons pourtant éditer le fichier et faire deux petits changements.
 
 Ouvrez le fichier ```mailserver.env``` avec votre éditeur de texte préféré et trouvez la ligne qui fait référence à Amavis. Changez la ligne pour désactiver son utilisation:
@@ -76,11 +84,34 @@ Ouvrez le fichier ```mailserver.env``` avec votre éditeur de texte préféré e
 ENABLE_AMAVIS = 0
 ```
 
+## NOTES MICHAEL RUCKSTUHL
+
+Changé:
+
+![](images/enable_amavis_var.png)
+
+## FIN NOTES MICHAEL RUCKSTUHL
+
 ---
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
 ```
 Réponse :
+
+Amavis parle avec le protocole SMTP standard et peut également utiliser l'interface Sendmail milter. Il est couramment utilisé pour
+
+- analyse antivirus en s'intégrant à ClamAV (Clam AntiVirus)
+- vérification anti-spam en s'intégrant à SpamAssassin
+- Signature et vérification DKIM*. (En fait, je préfère utiliser OpenDKIM pour la signature et la vérification DKIM.)
+
+source: https://www.linuxbabe.com/mail-server/postfix-amavis-spamassassin-clamav-ubuntu
+
+* DKIM est une méthode d'authentification d'e-mails standard qui ajoute une signature numérique aux messages sortants. Les serveurs de réception qui reçoivent des messages signés avec DKIM peuvent vérifier que les messages proviennent bien de l'expéditeur, et non d'une personne qui usurpe son identité.
+
+source: https://support.google.com/a/answer/174124?hl=fr
+
+
+Afin de réaliser ce laboratoire, il était important de désactiver tout cela en metteant la variable à 0.
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -89,14 +120,34 @@ Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans l
 PERMIT_DOCKER=connected-networks
 ```
 
+![](images/connected-network.png)
+
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
 ```
 Réponse :
+
+Permet de configurer les options pour mynetworks
+
+Comme on peut le voir sur la capture précédente:
+
+	- none => Force l'authentification (localhost seulement)
+	- container => L'ip du conteneur seulement
+	- host => Ajoute un conteneur réseau de docker
+	- network => Ajoute tous les conteneurs réseau docker
+	- connected-networks => Ajoute tous les réseaux docker connectés
 ```
 ---
 
 Vous allez maintenant éditer le fichier ```docker-compose.yml```. Ce fichier contient aussi une configuration de base qui est fonctionnelle sans modification. Vous pouvez pourtant changer le ```domainname``` dans ce fichier. Vous pouvez choisir ce qui vous convient. Vous voulez utiliser ```gmail.com```? Allez-y ! C'est votre serveur !
+
+## NOTES MICHAEL RUCKSTUHL
+
+Essayons avec le domaine de la HEIG-VD !!!
+
+![](images/heig-vd.png)
+
+## NOTES MICHAEL RUCKSTUHL FIN
 
 La dernière partie de la configuration c'est la création d'un compte que vous pouvez utiliser pour envoyer vos emails. Il suffit d'utiliser la commande suivante, avec évidement les paramètres que vous désirez. Ce compte sera utilisé pour vous authentifier auprès de votre serveur mail :
 
@@ -114,7 +165,15 @@ C'est le moment de télécharger l'image, créer le container et tester votre se
 docker-compose -f docker-compose.yml up -d
 ```
 
-Vous pouvez vous servir de la commande ```docker ps``` pour vérifier que votre container est créé et en fonctionnement. 
+## NOTES
+
+J'ai du ajouter version: "3" pour lancer la commande
+
+## FIN NOTES
+
+Vous pouvez vous servir de la commande ```docker ps``` pour vérifier que votre container est créé et en fonctionnement.
+
+![](images/docker-ps.png)
 
 Nous allons faire un test très basique pour nous assurer que le serveur fonctionne. Vous aurez besoin de ```telnet``` ou d'une commande équivalente (vous pouvez utiliser netcat, par exemple):
 
@@ -128,6 +187,10 @@ Si votre serveur fonctionne correctement, il devrait vous saluer avec :
 Connection to localhost port 25 [tcp/smtp] succeeded!
 220 mail.whitehouse.gov ESMTP
 ```
+
+Cela me semble ok:
+
+![](images/telnet25.png)
 
 Dans mon cas, j'ai configuré le domaine de mon serveur avec ```whitehouse.gov```
 
@@ -159,6 +222,8 @@ cGFzc3dvcmQ=                <----- "password" en base64
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
 
+*![](images/auth.png)*
+
 ---
 
 ### Configuration de votre client mail
@@ -173,6 +238,16 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
 
+Sur Thunderbird:
+
+Ingoing:
+
+![](images/ingoing.png)
+
+Outgoing:
+
+![](images/outgoing.png)
+
 ---
 
 Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails. Envoyez-vous un email à votre adresse de l'école pour le tester. 
@@ -183,6 +258,8 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
+![](images/mail.png)
+
 ---
 
 ## The Social-Engineer Toolkit (SET) 
@@ -263,7 +340,35 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
----
+GAPS:
+
+Clone:
+
+![](images/gabsClone.png)
+
+Les identifiants:
+
+![](images/gabs.png)
+
+POST:
+
+Clone:
+
+![](images/postClone.png)
+
+Les identifiants:
+
+![](images/post.png)
+
+CFF (https://www.swisspass.ch/oevlogin/login):
+
+Clone approximatif:
+
+![](images/cffClone.png)
+
+On voit que nous avons les informations nécessaires, Mais pas forcément dans les bon champs;
+
+![](images/cff.png)
 
 ### Mass Mailer Attack
 
@@ -294,8 +399,16 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
 ```
-Réponse :
+Réponse : Le mail ne s'est pas fait filtré!
 ```
+
+La configuration:
+
+![](images/mail01.conf.png)
+
+Le mail reçu:
+
+![](images/mail01.png)
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question. 
 
@@ -303,9 +416,15 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture :
+Réponse et capture : Le mail c'est fait filtré pour mon adresse privée michaelruckstuhl94@gmail.com. Je ne rien reçu.
 ```
----
+Capture:
+
+![](images/mail02.png)
+
+Log montrant que le mail a été envoyé mais bloqué:
+
+![](images/spam.png)
 
 ### Explorer les liens "Phishy" et le courrier électronique "Phishy"
 
@@ -328,11 +447,33 @@ Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
+Pour:
+
+![](images/mail01.png)
+
+Les data sont les suivantes:
+
+![](images/det01.png)
+
+![](images/det02.png)
+
+![](images/det03.png)
+
+On peut y voir les données du serveur mail de l'école.
+
+On peut voir le domain configuré plus tôt "mail.heig-vd.com". Ce qui montre par qui le mail est réellement envoyé.
+
+Le from forgé de support@microsoft.com
+
+L'addresse de destination: michael.ruckstuhl@heig-vd.ch
+
 ---
 #### Partagez avec nous vos conclusions.
 
 ```
 Conclusions :
+
+Ce labo est sympa pour nous montrer à quel point il est simple de faire du fishing. Cela me montre l'importance d'avoir un bon filtre de spam sur son serveur SMTP. Car je pense qu'il est très simple de forger des mail crédibles. La très grande majorité des utilisateurs ne prendront pas le temps de vérifier les header en cas de doute.
 ```
 ---
 
