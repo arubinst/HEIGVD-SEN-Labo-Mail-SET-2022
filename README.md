@@ -356,11 +356,17 @@ Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
+Voici l'entête du mail d'information pour le test de SWI 1
+![](./images/Entete_1.png)
+
+Voici les résultats de l'inspection avec l'outils de google. Il n'y a rien de suspect ce qui est normal.
+![](./images/Entete_2.png)
+
 ---
 #### Partagez avec nous vos conclusions.
 
 ```
-Conclusions :
+Conclusions : Le phishing est vraiment simple à mettre en place. Ce n'est donc pas étonnant que c'est l'une des attaques les plus efficaces et les plus courantes dans le monde. Il est de plus en plus difficile de les détecter et je pense qu'une grande majorité des personnes n'ont pas les outils pour ne pas tomber dans le piège.
 ```
 ---
 
