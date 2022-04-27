@@ -376,11 +376,25 @@ Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
+Screenshots du headers de l'email envoyé à ma boîte mail gmail personnelle :![Menu principal SET](images/headers1.png)
+
+![Menu principal SET](images/headers2.png)
+
+Le mail est d'abord parti de ma machine personnelle jusqu'au domaine `mail.tropiques.sol` pour ensuite arriver à mon adresse gmail.
+
+Les différentes adresses des envoyeurs / récépteurs sont indiquées, le contenu du message est également présent dans ce header.
+
+En voyant ce header, il est facile de réaliser que le mail ne vient pas du domaine `chemis.com` mais bien du domaine `tropiques.sol`. Cela devrait suffir à se douter que quelquechose ne tourne pas rond derrière ce message.
+
 ---
 #### Partagez avec nous vos conclusions.
 
 ```
-Conclusions :
+Conclusions : 
+
+Il était intéressant de prendre en main cet outil de phishing et de voir à quel point il est facile de forger de faux e-mail et de récupérer des identifiants grâce à un site web forgé. 
+
+Même si ces techniques ne fonctionnent pas à tous les coups (certains site protégés contre le clonage, mail forgés filtrés avant d'arriver au destinataire), cela donne une bonne idée de la facilité à exercer du phishing et de ses potentielles conséquences.
 ```
 ---
 
