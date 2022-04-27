@@ -80,7 +80,7 @@ ENABLE_AMAVIS = 0
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
 ```
-Réponse :
+Réponse : Amavis content filter (used for ClamAV & SpamAssassin)
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -92,7 +92,19 @@ PERMIT_DOCKER=connected-networks
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
 ```
-Réponse :
+Réponse : connected-networks => 
+Set different options for mynetworks option (can be overwrite in postfix-main.cf)
+# **WARNING**: Adding the docker network's gateway to the list of trusted hosts, e.g. using the `network` or
+# `connected-networks` option, can create an open relay
+# https://github.com/docker-mailserver/docker-mailserver/issues/1405#issuecomment-590106498
+# The same can happen for rootless podman. To prevent this, set the value to "none" or configure slirp4netns
+# https://github.com/docker-mailserver/docker-mailserver/issues/2377
+#
+# none => Explicitly force authentication
+# container => Container IP address only
+# host => Add docker container network (ipv4 only)
+# network => Add all docker container networks (ipv4 only)
+# connected-networks => Add all connected docker networks (ipv4 only)
 ```
 ---
 
@@ -158,7 +170,7 @@ cGFzc3dvcmQ=                <----- "password" en base64
 ```
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
-
+![](./images/conversation_authentification.png)
 ---
 
 ### Configuration de votre client mail
@@ -172,7 +184,9 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 ```
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
-
+![](./images/smtp_server.png)
+<br>
+il faut savoir que j'ai rajouter ggconsultingsarl.ch dans les hosts de la machine sur 127.0.0.1
 ---
 
 Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails. Envoyez-vous un email à votre adresse de l'école pour le tester.
@@ -183,6 +197,7 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
+![](./images/mail_prof.png)
 ---
 
 ## The Social-Engineer Toolkit (SET)
@@ -264,6 +279,18 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
 ---
+Ca fonctionne sur post finance
+![](./images/post_finance_1.png)
+![](./images/post_finance_2.png)
+
+Cela ne fonctionne pas sur gaps. Probablement à cause du nouveau login
+![](./images/gaps_1.png)
+![](./images/gaps_2.png)
+
+Ca fonctionne sur github
+![](./images/github_1.png)
+![](./images/github_2.png)
+![](./images/github_3.png)
 
 ### Mass Mailer Attack
 
@@ -294,17 +321,18 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
 ```
-Réponse :
+Réponse : Non, mon mail ne s'est pas fait filtrer. Peut-être car j'étais connecté au réseau de l'école. 
 ```
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
 
 ---
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
-
 ```
 Réponse et capture :
 ```
+Si une adresse avec un domaine de type gmail, il y a plus de chance qu'il ne soir pas filtrer.
+![](./images/mass_mailer_1.png)
 ---
 
 ### Explorer les liens "Phishy" et le courrier électronique "Phishy"
@@ -328,11 +356,17 @@ Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
+Voici l'entête du mail d'information pour le test de SWI 1
+![](./images/Entete_1.png)
+
+Voici les résultats de l'inspection avec l'outils de google. Il n'y a rien de suspect ce qui est normal.
+![](./images/Entete_2.png)
+
 ---
 #### Partagez avec nous vos conclusions.
 
 ```
-Conclusions :
+Conclusions : Le phishing est vraiment simple à mettre en place. Ce n'est donc pas étonnant que c'est l'une des attaques les plus efficaces et les plus courantes dans le monde. Il est de plus en plus difficile de les détecter et je pense qu'une grande majorité des personnes n'ont pas les outils pour ne pas tomber dans le piège.
 ```
 ---
 
