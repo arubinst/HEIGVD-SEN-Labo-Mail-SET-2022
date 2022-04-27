@@ -80,7 +80,8 @@ ENABLE_AMAVIS = 0
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
 ```
-Réponse :
+Réponse : D'après la [documentation mailserver](https://docker-mailserver.github.io/docker-mailserver/edge/config/environment/#enable_amavis) il s'agirait d'un filtre anti-spam pour emails. Amavis se place entre un agent de transferts de messages (MTA) et un service de filtre de contenu. 
+Cette option désactive Amavis. Dans la mesure où on ne configure pas le réception d'email, il n'y a que peu d'utilité à avoir un service de filtre.
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -92,7 +93,13 @@ PERMIT_DOCKER=connected-networks
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
 ```
-Réponse :
+Réponse : Les différentes options ->
+ - **none** : Force l'authentification
+ - **container** : N'accèpte que l'IP du container
+ - **network** : Ajoute le pont réseau de docker par défaut (172.16.0.0/12)
+ - connected-networks** : Ajoute tous les réseaux connectés de Docker (mais seulement en ipv4)
+
+PERMIT_DOCKER permets de configurer le réseau pour fonctionner avec Docker.
 ```
 ---
 
@@ -158,6 +165,7 @@ cGFzc3dvcmQ=                <----- "password" en base64
 ```
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
+![smtp_login](images/SMPT_login.png)
 
 ---
 
@@ -173,6 +181,10 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
 
+![config_client1.png](images/config_client1.png)
+
+![config_client2.png](images/config_client2.png)
+
 ---
 
 Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails. Envoyez-vous un email à votre adresse de l'école pour le tester.
@@ -183,6 +195,8 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
+
+![email.png](images/email.png)
 ---
 
 ## The Social-Engineer Toolkit (SET)
@@ -263,6 +277,10 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
+![postfinance](images/webharvester_postfinance.png)
+
+![gaps](images/webharvester_gaps.png)
+
 ---
 
 ### Mass Mailer Attack
@@ -294,7 +312,13 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
 ```
-Réponse :
+Réponse : Oui, mon email c'est fait filter. Les raisons suivantes sont données:
+ - Missing message-Id: header
+ - From: base64 encoded unnecessarily
+ - From: base64 encoded unnecessarily
+ - Missing Date: header
+ - Delivered to trusted network by host with dynamic-loking rDNS
+ - Custom Rule MJ1963
 ```
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
@@ -303,8 +327,11 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture :
+Réponse et capture : Oui, l'email c'est fait filtrer et déplacer dans les spam par Gmail 🥲
 ```
+
+![gmail spamm](images/gmail_spam.png)
+
 ---
 
 ### Explorer les liens "Phishy" et le courrier électronique "Phishy"
@@ -328,11 +355,30 @@ Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
----
+![email header](images/email_header.png)
+
+**1.** Les différentes informations qui se trouvent dans ces headers montre le chemin emprunté par le mail pour atteindre sa destination.
+
+**2.** Le serveur de réçeption semble utiliser le service [barracuda](https://www.barracuda.com/products/emailsecuritygateway) pour la protection contre les spams.
+
+**3.** Nous notons également qu’un «  X-Barracuda-Spam-Score» indique la probabilité que l’email reçu soit un spam. 1 ayant peu de chance d’être un spam et 10 définitivement un spam. Nous obtenons un résultat de **3.20**. 
+En fonction du score, l'email sera remis au destinataire de la manière suivante : 
+```
+0.0 – 2.99 –> Déliveré dans la boîte de réception.
+3.0 – 4.99 –> Déliveré dans la boîte de réception, avec un tag "email suspect".
+5.0 – 6.99 –> Email mis en quarantaine.
+7.0 – 10.0 –> Email bloqué.
+```
+Le header détaille également comment les points ont été calculés, pouvant nous aider à envoyer un email moins suspect. Notons que `MISSING_DATE` nous fait prendre 1.4 au score, ce qui ne devrait pas poser beaucoup de problèmes à corriger. Il en est de même pour `FROM_EXCESS_BASE64` qui serait un encodage base64 inutile.
+
+**4.** Il est intéressant de noter que le `Return-Path` est spécifié. Généralement, un email de spam ne souhaiterait pas recevoir en retour un email pour chaque destinataire qui n'a pas pu être atteint.
+
 #### Partagez avec nous vos conclusions.
 
 ```
-Conclusions :
+Conclusions : 
+
+Malgré quelques problèmes de configurations sur Windows et MacOS (puce M1), qui a nécessité pas mal de bidouillage, nous sommes surpris par la facilité qu’il y a pour créer un serveur mail. Pourtant omniprésents et considérés comme une source sûre, les mails sont pourtant aussi sécurisés qu’une Bentley dont on aurait les fenêtres ouvertes dans le Bronks. N’importe qui peut se faire passer pour n’importe qui, et il est facile de mettre en place une compagne de phising en se faisant passer pour le service des impôts, qui envoient un mail pour aider une retraitée à se faire rembourser son surplus payé. 
 ```
 ---
 
