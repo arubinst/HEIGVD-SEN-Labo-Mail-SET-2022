@@ -1,6 +1,5 @@
 # Teaching-HEIGVD-SEN-2022-Laboratoire-Docker-Mail et SET
 
-
 ## Introduction
 
 L'un des outils le plus important dans l'arsenal d'un ingénieur social c'est l'email.
@@ -13,7 +12,6 @@ Pour complémenter le travail réalisé pour apprendre à connaitre la cible afi
 
 Il est donc très intéressant de ne pas dépendre d'un serveur mail public. Vous pouvez configurer votre propre serveur email avec quelques manipulations très simples. Ce serveur vous appartient. Il acceptera de faire tout ce que vous lui demanderez de faire, sans poser des questions.
 
-
 ## Une petite note sur l'éthique
 
 Il n'est absolument pas acceptable d'attaquer quelqu'un pour quelque raison que ce soit.
@@ -21,7 +19,6 @@ Il n'est absolument pas acceptable d'attaquer quelqu'un pour quelque raison que 
 L'utilisation de ces outils à des fins autres que votre propre éducation et formation sans autorisation est strictement interdite par les politiques de ce cours et de l'école, ainsi que par les lois.
 
 Le but de cet exercice est de vous permettre de vous familiariser avec les outils et comment ils peuvent être utilisés dans le contexte professionnel d'un pentest. Ça vous permettra aussi de comprendre les tactiques de l'adversaire afin de pouvoir les contrer par le biais de la politique, de l'éducation et de la formation.
-
 
 ## Que faut-il faire ?
 
@@ -53,6 +50,7 @@ Nous allons commencer par créer un répertoire "mailserver" et entrer dedans (c
 mkdir mailserver
 cd mailserver
 ```
+
 Ensuite, nous allons télécharger les 3 fichiers indispensables pour déployer le serveur. Vous n'êtes pas obligés de cloner le repo github entier.
 
 ```bash
@@ -77,10 +75,15 @@ ENABLE_AMAVIS = 0
 ```
 
 ---
+
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
-```
+```text
 Réponse :
+
+Permettre l'activation ou non d'Amavis (le enable, quoi). 
+
+Selon Wikipédia, Amavis est un filtre de contenu pour e-mail fournissant une protection contre les spams et virus (et autre malware).
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -91,9 +94,20 @@ PERMIT_DOCKER=connected-networks
 
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
-```
+```text
 Réponse :
+
+Selon la doc:
+
+- none => Explicitly force authentication
+- container => Container IP address only.
+- host => Add docker host (ipv4 only).
+- network => Add the docker default bridge network (172.16.0.0/12); WARNING: docker-compose might use others (e.g. 192.168.0.0/16) use PERMIT_DOCKER=connected-networks in this case.
+- connected-networks => Add all connected docker networks (ipv4 only).
+
+Défini avec quels réseaux le mailserver communique.
 ```
+
 ---
 
 Vous allez maintenant éditer le fichier ```docker-compose.yml```. Ce fichier contient aussi une configuration de base qui est fonctionnelle sans modification. Vous pouvez pourtant changer le ```domainname``` dans ce fichier. Vous pouvez choisir ce qui vous convient. Vous voulez utiliser ```gmail.com```? Allez-y ! C'est votre serveur !
@@ -155,9 +169,7 @@ cGFzc3dvcmQ=                <----- "password" en base64
 
 #### Faire une capture de votre authentification auprès de votre serveur mail
 
-```
-Livrable : capture de votre conversation/authentification avec le serveur
-```
+![alt text](images/authsuccess.jpg)
 
 ---
 
@@ -169,9 +181,9 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 
 ### Montrez-nous votre configuration à l'aide d'une capture
 
-```
-Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
-```
+Comme je suis sur une VM, va foulard que j'installe Thunderbird, qui n'est pas mon client préféré, mais wateva.
+
+![alt text](images/mailsuccess.jpg)
 
 ---
 
@@ -180,9 +192,11 @@ Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails.
 Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilisant votre serveur. Puisque vous avez certainement créé un faux compte email, n'oubliez pas de signer le message avec votre vraie nom pour nous permettre de vous identifier.
 
 ---
-```
-Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
-```
+
+J'sais pas pourquoi, mais je n'arrive pas à envoyer d'e-mail, j'me dis que c'est parce que ça vient d'une VM. Et aussi peut-être parce que je n'ai pas restart certains des daemons après les installations et lancement de certains paquets.
+
+![alt text](images/keinmailsending.jpg)
+
 ---
 
 ## The Social-Engineer Toolkit (SET)
@@ -195,30 +209,30 @@ Le SET est spécifiquement conçu pour réaliser des attaques avancées contre l
 
 La réalité c'est que, en raison de l'évolution très rapide en matière de protection, cet outil fonctionne que partiellement. C'est un peu le jeu du chat et la souris. Le support pour certaines fonctionnalités est souvent utilisable pendant un certain temps et puis, rendu inutile. Cela reste quand-même très intéressant à le surveiller et à l'essayer.
 
-
 ### Téléchargement et installation de SET
 
 Le SET est nativement supporté sur Linux et sur Mac OS X (experimental). Il est normalement préinstallé sur Kali Linux et il est capable de se mettre à jour lui-même.
 
 Pour une installation sur Ubuntu/Debian/Mac OS X (ou si vous ne le retrouvez pas sur Kali) :
 
-```
+```bash
 git clone https://github.com/trustedsec/social-engineer-toolkit/ setoolkit/
 cd setoolkit
 pip3 install -r requirements.txt
 python setup.py
 ```
+
 ### Execution de SET
 
 Pour exécuter SET, dans votre terminal taper :
 
-```
+```bash
 setoolkit
 ```
 
 Dépendant de votre OS et de votre installation particulière, il est possible que certaines fonctionnalités ne soient pas disponibles au moins d'utiliser ```sudo```.
 
-```
+```bash
 sudo setoolkit
 ```
 
@@ -263,6 +277,18 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
+##### Post Finance
+
+![alt text](images/setpost.jpg)
+
+##### GAPS
+
+![alt text](images/setgaps.jpg)
+
+##### Pixiv
+
+![alt text](images/setpixiv.jpg)
+
 ---
 
 ### Mass Mailer Attack
@@ -291,20 +317,29 @@ En fonction de beaucoup de paramètres (config de votre serveur mail, par exempl
 Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations rajoutées par le filtre de spam.
 
 ---
+
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
-```
+```text
 Réponse :
+
+Comme avec l'envoi précédent, j'ai toujours cette erreur du `dns lookup failed (in reply to MAIL FROM command`, peut-être un problème avec une adresse qui finit en `.wtf` ?
 ```
+
+![alt text](images/setmailattack.jpg)
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
 
 ---
-#### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
-```
+#### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture
+
+```text
 Réponse et capture :
+
+Boah, j'avoue que je ne vais pas retenter l'expérience, car je vais certainement avoir le même résultat qu'avant, s'ry. J'reviendrais probablement poser des questions sur le labo par la suite plus tard pendant un cours ou labo.
 ```
+
 ---
 
 ### Explorer les liens "Phishy" et le courrier électronique "Phishy"
@@ -312,7 +347,7 @@ Réponse et capture :
 Pour cette dernière partie de notre exploration du phishing, nous allons utiliser un contenu réalisé par les  Dr. Matthew L. Hale, le Dr. Robin Gandhi et la Dr. Briana B. Morrison de [Nebraska GenCyber](
 http://www.nebraskagencyber.com).
 
-Visitez : [https://mlhale.github.io/nebraska-gencyber-modules/phishing/README/ ](https://mlhale.github.io/nebraska-gencyber-modules/phishing/README/) et passez en revue les modules :
+Visitez : [https://mlhale.github.io/nebraska-gencyber-modules/phishing/README/](https://mlhale.github.io/nebraska-gencyber-modules/phishing/README/) et passez en revue les modules :
 
 - Analyse d'url. **Ce module risque d'être beaucoup trop simple pour vous** mais il peut être très intéressant pour vos rapports de pentest, surtout comme outil pour sensibiliser les employés d'une entreprise. Gardez-le précieusement comme une partie de votre toolbox pour l'avenir.
 - Analyse d'Email (ce module est probablement plus intéressant techniquement pour vous)
@@ -321,19 +356,40 @@ En général, c'est un bon exemple de matériel de formation et d'éducation qui
 
 Vous avez la liberté de reproduire et d'utiliser ce matériel grâce à sa licence.
 
-
 #### Soumettre des captures d'écran
 
 Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
----
-#### Partagez avec nous vos conclusions.
+Comme je n'ai pas réussi à envoyer d'e-mail depuis ma VM avec `mailserver`, j'ai décidé de regarder un e-mail que j'ai reçu de l'une des commissions de l'EPFL, la GNU Generation.
 
-```
+![alt text](images/mailanalsis.jpg)
+
+On peut voir que l'e-mail est envoyé depuis les serveurs de l'EPFL, puis ceux de la GNU (comme ça qu'on l'appelle je crois bien) qui ont de chouette nom d'endroit bien suisse pour finalement arriver à l'HEIG-VD.
+
+Plus bas dans l'entête, un beau spam score de -102.5, ce qui semble être une plutôt bonne nouvelle.
+
+Et avec l'outil de visualisation de Google (Admin Toolbox), un petit aperçu plus facile à lire pour l'homme.
+
+![alt text](images/mailgooglanalsis.jpg)
+
+---
+
+#### Partagez avec nous vos conclusions
+
+```text
 Conclusions :
+
+Déjà pendant un des cours de 1ère année, on a pu voir que forger des e-mails était plutôt facile. On peut se faire passer pour n'importe qui plus ou moins aisément, mentir sur la provenance du message. En bref, si l'attaque est qualitative au point de ressembler trait pour trait à un e-mail authentique, couplé à un faux site qui serait lui aussi bien fait pour récupérer les credentials, il faudrait constamment être à l'affût et ce n'est pas mince affaire.
+
+Bien entendu, il faut que tout soit bien configuré (parce que dans mon cas, il y a un problème de DNS, mais faudrait que je voie avec l'assistant ou le professeur pour voir d'où peut bien venir le problème) pour que ces attaques vaillent la peine d'être effectuée (rigolez avoir moi pls, j'me sens seul).
+
+On peut aussi se rendre compte du travail stylé fait par des entreprises qui mettent à disposition des outils pour informer les gens de comment certaines attaques peuvent se passer. Il s'agira toutefois de garder un cadre moral, sinon les abus arrivent vites.
+
+N'empêche, j'aurai voulu voir mes mails avec des adresses ridicules être envoyées, j'aurai bien ris.
 ```
+
 ---
 
 ## Echeance
