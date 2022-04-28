@@ -158,6 +158,7 @@ cGFzc3dvcmQ=                <----- "password" en base64
 ```
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
+![authentification avec le serveur](images/livrable1.PNG)
 
 ---
 
@@ -172,6 +173,7 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 ```
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
+![configuration du serveur SMTP sur un client mail : Thunderbird](images/livrable3.PNG)
 
 ---
 
@@ -183,6 +185,10 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
+![capture du mail envoyé (Thunderbird)](images/livrable4.PNG)
+![capture du mail envoyé (Dans mon gmail)](images/livrable20.PNG)
+
+
 ---
 
 ## The Social-Engineer Toolkit (SET)
@@ -264,6 +270,11 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
 ---
+![Test GAPS qui a marché](images/livrable6.PNG)
+![Test Facebook qui a marché](images/livrable8.PNG)
+![Test PostFinance qui n'a pas marché](images/livrable7.PNG)
+
+
 
 ### Mass Mailer Attack
 
@@ -294,8 +305,20 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
 ```
-Réponse :
+Réponse : Je l'ai fait deux fois en utilisant comme cible le mail de l'école rosy-laure.wonjamouna@heig-vd.ch
+Je constate que si le mail est vraiment bidon comme vache@vache.fr, il n'est pas filtré par l'antispam. Tandis que lorsque le spam est assez "évident", c'est à dire en utilisant une fausse adresse du type elon.musk@gmail.com, il est detecté par l'antispam de l'école comme étant un spam.
 ```
+
+![Test avec vache@vache.fr](images/vache.PNG)
+![Résultat du test avec vache@vache.fr](images/vache2.PNG)
+![Test avec elon.musk@gmail.com](images/elon.PNG)
+![Résultat du test avec elon.musk@gmail.com](images/elon2.PNG)
+![Résultat du test avec elon.musk@gmail.com](images/elon3.PNG)
+![Résultat du test avec elon.musk@gmail.com](images/elon4.PNG)
+
+On peut voir dans la dernière capture quel sont les éléments exactes qui ont induit ce filtrage dans le rule brea
+
+
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
 
@@ -303,8 +326,17 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture :
+Réponse et capture : J'ai aussi essayé d'envoyé sur mon mail gmail rosy.heig@gmail.com et le mail s'est fait filtré
+
+![Test avec moo@example.com](images/livrable12.PNG)
+![Résultat du test avec moo@example.com](images/livrable14.PNG)
+
+Il semble que cet email ressemble à des mails antérieurement identifiés comme spam, et de ce fait a été mis dans les spams.
+
+
+
 ```
+
 ---
 
 ### Explorer les liens "Phishy" et le courrier électronique "Phishy"
@@ -327,6 +359,11 @@ Vous avez la liberté de reproduire et d'utiliser ce matériel grâce à sa lice
 Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
+
+Je prend l'entête du courrier que j'ai envoyé sur mon gmail avec moo@example.com
+
+![Résultat du test avec moo@example.com](images/livrable14.PNG)
+
 
 ---
 #### Partagez avec nous vos conclusions.
