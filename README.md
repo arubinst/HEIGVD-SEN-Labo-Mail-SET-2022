@@ -387,7 +387,7 @@ Je prend l'entête du courrier que j'ai envoyé sur mon gmail avec moo@example.c
 #### Partagez avec nous vos conclusions.
 
 ```
-Conclusions : La source smtp.mail.from n'est pas cohérente avec le received by.
+Conclusions : La source smtp.mail.from "moo@eexample" n'est pas cohérente avec le received from "mail.poursuites.ch"
 ```
 ---
 
