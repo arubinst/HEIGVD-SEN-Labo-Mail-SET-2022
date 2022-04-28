@@ -165,7 +165,7 @@ Livrable : capture de votre conversation/authentification avec le serveur
 
 
 
-![image-20220407113012710](C:\Users\jean_\AppData\Roaming\Typora\typora-user-images\image-20220407113012710.png)
+![image-20220407113012710](images/image-20220407113012710.png)
 
 ---
 
@@ -181,9 +181,9 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
 
-![image-20220407114238226](C:\Users\jean_\AppData\Roaming\Typora\typora-user-images\image-20220407114238226.png)
+![image-20220407114238226](images/image-20220407114238226.png)
 
-![image-20220407114301917](C:\Users\jean_\AppData\Roaming\Typora\typora-user-images\image-20220407114301917.png)
+![image-20220407114301917](images/image-20220407114301917.png)
 
 ---
 
@@ -195,7 +195,7 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
-![image-20220407114638043](C:\Users\jean_\AppData\Roaming\Typora\typora-user-images\image-20220407114638043.png)
+![image-20220407114638043](images/image-20220407114638043.png)
 
 ---
 
@@ -279,11 +279,11 @@ Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites p
 
 Gaps : 
 
-![image-20220407134322036](C:\Users\jean_\AppData\Roaming\Typora\typora-user-images\image-20220407134322036.png)
+![image-20220407134322036](images/image-20220407134322036.png)
 
 PostFinance : 
 
-![image-20220407134520779](C:\Users\jean_\AppData\Roaming\Typora\typora-user-images\image-20220407134520779.png)
+![image-20220407134520779](images/image-20220407134520779.png)
 
 ---
 
@@ -319,7 +319,7 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 Réponse : Non
 ```
 
-![image-20220407140609315](C:\Users\jean_\AppData\Roaming\Typora\typora-user-images\image-20220407140609315.png)
+![image-20220407140609315](images/image-20220407140609315.png)
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
 
