@@ -80,7 +80,7 @@ ENABLE_AMAVIS = 0
 #### Question : quelle est l'utilité de cette option ? C'est quoi Amavis ?
 
 ```
-Réponse :
+Réponse : Amavis est un filtre de contenu, il permet d'éviter de recevoir des spams et autres contenus indésirables comme des malwares.
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -92,7 +92,11 @@ PERMIT_DOCKER=connected-networks
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
 ```
-Réponse :
+Réponse : 
+none => Force l'authentification de manière explicite
+container => L'adresse IP du container
+host => ajoute tous les réseaux du container docker
+connected-networks => ajoute tous les réseaux docker connectés
 ```
 ---
 
@@ -159,6 +163,10 @@ cGFzc3dvcmQ=                <----- "password" en base64
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
 
+
+
+![image-20220407113012710](C:\Users\jean_\AppData\Roaming\Typora\typora-user-images\image-20220407113012710.png)
+
 ---
 
 ### Configuration de votre client mail
@@ -173,6 +181,10 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
 
+![image-20220407114238226](C:\Users\jean_\AppData\Roaming\Typora\typora-user-images\image-20220407114238226.png)
+
+![image-20220407114301917](C:\Users\jean_\AppData\Roaming\Typora\typora-user-images\image-20220407114301917.png)
+
 ---
 
 Vous pouvez maintenant vous servir de votre serveur SMTP pour envoyer des mails. Envoyez-vous un email à votre adresse de l'école pour le tester.
@@ -183,6 +195,8 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
+![image-20220407114638043](C:\Users\jean_\AppData\Roaming\Typora\typora-user-images\image-20220407114638043.png)
+
 ---
 
 ## The Social-Engineer Toolkit (SET)
@@ -263,6 +277,14 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
+Gaps : 
+
+![image-20220407134322036](C:\Users\jean_\AppData\Roaming\Typora\typora-user-images\image-20220407134322036.png)
+
+PostFinance : 
+
+![image-20220407134520779](C:\Users\jean_\AppData\Roaming\Typora\typora-user-images\image-20220407134520779.png)
+
 ---
 
 ### Mass Mailer Attack
@@ -294,8 +316,10 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
 ```
-Réponse :
+Réponse : Non
 ```
+
+![image-20220407140609315](C:\Users\jean_\AppData\Roaming\Typora\typora-user-images\image-20220407140609315.png)
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
 
@@ -303,7 +327,7 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture :
+Réponse et capture : Oui, il m'est impossible d'envoyer une capture puisque le mail n'apparait nulle part dans mon mail, que ce soit dans la boite de réception ou dans le courrier indésirable.
 ```
 ---
 
@@ -328,14 +352,86 @@ Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
+Voici l'en-tête d'un mail de newsletter de la HEIG-VD : 
+
+``````
+Received: from EIMAIL03.einet.ad.eivd.ch (10.192.41.73) by
+ EIMAIL01.einet.ad.eivd.ch (10.192.41.71) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24 via Mailbox Transport; Thu, 7 Apr 2022 14:06:08 +0200
+Received: from EIMAIL03.einet.ad.eivd.ch (10.192.41.73) by
+ EIMAIL03.einet.ad.eivd.ch (10.192.41.73) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.24; Thu, 7 Apr 2022 14:06:08 +0200
+Received: from mail01.heig-vd.ch (10.192.222.28) by EIMAIL03.einet.ad.eivd.ch
+ (10.192.41.73) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.24 via Frontend
+ Transport; Thu, 7 Apr 2022 14:06:08 +0200
+X-ASG-Debug-ID: 1649333164-1114bd34048dcb20002-sL9ehi
+Received: from mx198.a.outbound.createsend.com (mx198.a.outbound.createsend.com [203.55.21.198]) by mail01.heig-vd.ch with ESMTP id XKQ4lCm8sSrvhAS9 for <jean-luc.blanc2@heig-vd.ch>; Thu, 07 Apr 2022 14:06:06 +0200 (CEST)
+X-Barracuda-Envelope-From: HEIGVD-bitjhty1ikidkjkdii1y@cmail19.com
+X-Barracuda-Effective-Source-IP: mx198.a.outbound.createsend.com[203.55.21.198]
+X-Barracuda-Apparent-Source-IP: 203.55.21.198
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=cm; d=heig-vd.ch;
+ h=Subject:From:To:Reply-To:Date:MIME-Version:Content-Type:List-Unsubscribe:Message-ID; i=info@heig-vd.ch;
+ bh=F5BUClXHXyk7VFsE1ARojQf0kpQ=;
+ b=WhZfUYux4Nn3Reyw1LTHGPdSWN5zwrmwuGlkWhZnpTkY91l8EjjJxGvcqp6k8wdi3kPInrEQgnN7
+   VuBR4epfyfpERXAPdiUEIfBOe7jY1aqpIpi6mJ2j6U3XSrE0GKzi
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=cs2013; d=cmail2.com;
+ h=Subject:From:To:Reply-To:Date:MIME-Version:Content-Type:List-Unsubscribe:Message-ID;
+ bh=F5BUClXHXyk7VFsE1ARojQf0kpQ=;
+ b=jybPfi2euXSx+JY/D8VU9bLC67rIUYikB2GqG9qr7UwtaAecMaMx3Nw1Jf6yhBrWB83b9ZaikfxX
+   +oiFHsvTSWvu6jJntbW3a8Iz0mnCQKux55uDhwRp17Rz43OPd9+y/Nh28pGMaVU2f7d/9ZRL0qfr
+   S5o8VWNG5diDDZF2Z/8=
+Subject: Newsletter Interne HEIG-VD - 7 avril 2022
+From: "HEIG-VD" <info@heig-vd.ch> 
+X-ASG-Orig-Subj: Newsletter Interne HEIG-VD - 7 avril 2022
+To: "jean-luc.blanc2@heig-vd.ch" <jean-luc.blanc2@heig-vd.ch>
+Reply-To: info@heig-vd.ch
+Date: Thu, 07 Apr 2022 22:02:45 +1000
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="_4cbf4cb1-09db-4b1e-966d-a6b7deb9a66b_"; charset=utf-8
+X-Mailer: Create Send
+X-Complaints-To: abuse@cmail19.com
+X-Feedback-ID: CA1-y-bitjhty:LI1-y-jrklgk:CL1-y-qiuth:createSEND
+List-Unsubscribe: <http://unsub.cmail19.com/t/y-u-bitjhty-ikidkjkdii/>,
+ <mailto:unsubscribe-bitjhty2ikidkjkdii2y-01A664A5@cmail19.com?subject=Unsubscribe>
+Message-ID: <cm.2202454140365.bitjhty.ikidkjkdii.y@cmail19.com>
+X-Barracuda-Connect: mx198.a.outbound.createsend.com[203.55.21.198]
+X-Barracuda-Start-Time: 1649333166
+X-Barracuda-URL: https://quarantine.heig-vd.ch:443/cgi-mod/mark.cgi
+X-Barracuda-BRTS-Status: 1
+X-Virus-Scanned: by bsmtpd at heig-vd.ch
+X-Barracuda-Scan-Msg-Size: 195599
+X-Barracuda-Spam-Score: -1001.00
+X-Barracuda-Spam-Status: No, SCORE=-1001.00 using global scores of TAG_LEVEL=1000.0 QUARANTINE_LEVEL=4.0 KILL_LEVEL=5.0 
+Return-Path: HEIGVD-bitjhty1ikidkjkdii1y@cmail19.com
+X-MS-Exchange-Organization-Network-Message-Id: 432a2208-f2a0-4920-d0fb-08da188effd8
+X-MS-Exchange-Organization-AVStamp-Enterprise: 1.0
+X-MS-Exchange-Organization-AuthSource: EIMAIL03.einet.ad.eivd.ch
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:00.3708981
+X-MS-Exchange-Processed-By-BccFoldering: 15.01.2375.024
+
+``````
+
 ---
 #### Partagez avec nous vos conclusions.
 
 ```
 Conclusions :
+L'email provient d'un serveur mail de la HEIG, mail01.heig-vd.ch
+
+On remarque que l'adresse du Return-Path est différente du champ From, cela pourrait être un indicateur de spam ou de mails indésirables.
+
+Le système de filtrade de l'école indique un spam score de "-1001.00"(X-Barracuda-Spam-Score). Ce mail n'est donc pas considéré comme un spam puisque son score est très bas (négatif même).
+
+Après réflexion, en se basant uniquement sur l'en-tête, ce mail ne peut-être considéré comme étant du spam puisque son score est extrèment bas.
 ```
 ---
 
 ## Echeance
 
 Le 14 avril 2022 à 10h25
+
