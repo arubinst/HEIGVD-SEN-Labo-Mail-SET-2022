@@ -83,9 +83,9 @@ ENABLE_AMAVIS = 0
 
 ```
 Réponse :
-On peut uiliser Anavis pour filtrer les emails (virus, spam, pièces jointe malveillantes ou intertides). Il est utilisé pour clamAV & SpamAssassin
+On peut utiliser Anavis pour filtrer les emails (virus, spam, pièces jointe malveillantes ou interdites). Il est utilisé pour clamAV & SpamAssassin
 
-On le désinstalle pour éviter que les emails que l'on va envoyer soit détect et filtrer.
+On le désinstalle pour éviter que les emails que l'on va envoyer soient détectés et filtrés.
 
 Source : https://wiki.evolix.org/HowtoAmavis
 
@@ -105,6 +105,8 @@ Remarques : valeur par défaut => none, force explicitement une authentification
 
 ```
 Réponse :
+Permet de configurer le réseau du containeur
+
 container => Adresse IP du container seulement
 host => ajouter un réseau docker en IPV4
 network => Ajouter tous les réseaux containeur (ipv4 seulement)
@@ -340,7 +342,11 @@ En fonction de beaucoup de paramètres (config de votre serveur mail, par exempl
 
 Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations rajoutées par le filtre de spam.
 
-![email-send](./assets/email-send.PNG)
+
+
+Capture
+
+#### ![email-send](./assets/email-send.PNG)
 
 ---
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
