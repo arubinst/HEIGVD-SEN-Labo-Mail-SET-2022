@@ -316,7 +316,9 @@ Je constate que si le mail est vraiment bidon comme vache@vache.fr, il n'est pas
 ![Résultat du test avec elon.musk@gmail.com](images/elon3.PNG)
 ![Résultat du test avec elon.musk@gmail.com](images/elon4.PNG)
 
-On peut voir dans la dernière capture quel sont les éléments exactes qui ont induit ce filtrage dans le rule brea
+```
+On peut voir dans la dernière capture quel sont les éléments exactes qui ont induit ce filtrage dans le rule breakdown comme par exemple l'excès d'utilisation de base64.
+```
 
 
 
@@ -328,14 +330,12 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 ```
 Réponse et capture : J'ai aussi essayé d'envoyé sur mon mail gmail rosy.heig@gmail.com et le mail s'est fait filtré
 
-![Test avec moo@example.com](images/livrable12.PNG)
-![Résultat du test avec moo@example.com](images/livrable14.PNG)
-
 Il semble que cet email ressemble à des mails antérieurement identifiés comme spam, et de ce fait a été mis dans les spams.
 
-
-
 ```
+
+![Test avec moo@example.com](images/livrable12.PNG)
+![Résultat du test avec moo@example.com](images/livrable14.PNG)
 
 ---
 
@@ -362,7 +362,7 @@ Pour cette tâche, prenez des captures d'écran de :
 
 Je prend l'entête du courrier que j'ai envoyé sur mon gmail avec moo@example.com
 
-![Résultat du test avec moo@example.com](images/livrable14.PNG)
+![Résultat du test avec moo@example.com](images/livrable13.PNG)
 
 
 ---
