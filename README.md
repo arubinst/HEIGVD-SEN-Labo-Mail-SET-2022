@@ -81,6 +81,8 @@ ENABLE_AMAVIS = 0
 
 ```
 Réponse :
+Cette option permet d'activer Amavis.
+Amavis est un filtre de contenu pour email open-source. On peut le considérer comme une interface entre le MTA (mail transfert agent) et un portefeuille d'outil de filtrage comme SpamAssassins, ClamAV et d'autres outils de filtrage.
 ```
 
 Cherchez ensuite la variable ```PERMIT_DOCKER``` dans ce même fichier et dans la documentation. Changez sa valeur à :
@@ -92,7 +94,16 @@ PERMIT_DOCKER=connected-networks
 #### Question : Quelles sont les différentes options pour cette variable ? Quelle est son utilité ? (gardez cette information en tête si jamais vous avez des problèmes pour interagir avec votre serveur...)
 
 ```
-Réponse :
+Réponse : Son utilité est d'indiquer quel sont les hôtes de confiance du serveur.
+Les différentes options sont :
+none => Explicitly force authentication
+container => Container IP address only.
+host => Add docker host (ipv4 only).
+network => Add the docker default bridge network (172.16.0.0/12); WARNING: docker-compose might use others (e.g. 192.168.0.0/16) use PERMIT_DOCKER=connected-networks in this case.
+connected-networks => Add all connected docker networks (ipv4 only).
+
+Et la dernière option en particulier permet de créer un open relay sur notre serveur SMTP, ce qui veut dire que n'importe qui peut envoyer un email à travers ce serveur
+
 ```
 ---
 
@@ -158,6 +169,7 @@ cGFzc3dvcmQ=                <----- "password" en base64
 ```
 Livrable : capture de votre conversation/authentification avec le serveur
 ```
+![authentification avec le serveur](images/livrable1.PNG)
 
 ---
 
@@ -172,6 +184,7 @@ Cette partie dépend de votre OS et votre client mail. Vous devez configurer sur
 ```
 Livrable : capture de votre configuration du serveur SMTP sur un client mail de votre choix
 ```
+![configuration du serveur SMTP sur un client mail : Thunderbird](images/livrable3.PNG)
 
 ---
 
@@ -183,6 +196,10 @@ Si tout fonctionne correctement, envoyez-nous (Stéphane et moi) un email utilis
 ```
 Livrable : capture de votre mail envoyé (si jamais il se fait bloquer par nos filtres de spam...
 ```
+![capture du mail envoyé (Thunderbird)](images/livrable4.PNG)
+![capture du mail envoyé (Dans mon gmail)](images/livrable20.PNG)
+
+
 ---
 
 ## The Social-Engineer Toolkit (SET)
@@ -264,6 +281,16 @@ On a pourtant trouvé deux sites qui fonctionnent bien et que vous pouvez essaye
 Pour le collecteur d'identifiants, montrez que vous avez cloné les deux sites proposés. Dans chaque cas, saisissez des fausses informations d'identification sur votre clone local, puis cliquez le bouton de connexion. Essayez d'autres sites qui puissent vous intéresser (rappel : ça ne marche pas toujours). Faites des captures d'écran des mots de passe collectés dans vos tests avec SET.
 
 ---
+Test GAPS qui a marché
+![Test GAPS qui a marché](images/livrable6.PNG)
+
+Test Facebook qui a marché
+![Test Facebook qui a marché](images/livrable8.PNG)
+
+Test PostFinance qui n'a pas marché
+![Test PostFinance qui n'a pas marché](images/livrable7.PNG)
+
+
 
 ### Mass Mailer Attack
 
@@ -294,8 +321,24 @@ Si votre mail s'est fait filtrer, lire les entêtes et analyser les informations
 #### Question : Est-ce que votre mail s'est fait filtrer ? qu'es-ce qui a induit ce filtrage ?
 
 ```
-Réponse :
+Réponse : Je l'ai fait deux fois en utilisant comme cible le mail de l'école rosy-laure.wonjamouna@heig-vd.ch
+Je constate que si le mail est vraiment bidon comme vache@vache.fr, il n'est pas filtré par l'antispam. Tandis que lorsque le spam est assez "évident", c'est à dire en utilisant une fausse adresse du type elon.musk@gmail.com, il est detecté par l'antispam de l'école comme étant un spam.
 ```
+Test avec vache@vache.fr
+![Test avec vache@vache.fr](images/vache.PNG)
+![Résultat du test avec vache@vache.fr](images/vache2.PNG)
+
+Test avec elon.musk@gmail.com
+![Test avec elon.musk@gmail.com](images/elon.PNG)
+![Résultat du test avec elon.musk@gmail.com](images/elon2.PNG)
+![Résultat du test avec elon.musk@gmail.com](images/elon3.PNG)
+![Résultat du test avec elon.musk@gmail.com](images/elon4.PNG)
+
+```
+On peut voir dans la dernière capture quel sont les éléments exactes qui ont induit ce filtrage dans le rule breakdown comme par exemple l'excès d'utilisation de base64.
+```
+
+
 
 Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez l'utiliser comme cible, soumettre une capture et répondre à la question.
 
@@ -303,8 +346,15 @@ Si vous avez une autre adresse email (adresse privée, par exemple), vous pouvez
 #### Question : Est-ce que votre mail s'est fait filtrer dans ce cas-ci ? Montrez une capture.
 
 ```
-Réponse et capture :
+Réponse et capture : J'ai aussi essayé d'envoyé sur mon mail gmail rosy.heig@gmail.com et le mail s'est fait filtré
+
+Il semble que cet email ressemble à des mails antérieurement identifiés comme spam, et de ce fait a été mis dans les spams.
+
 ```
+Test avec moo@example.com
+![Test avec moo@example.com](images/livrable12.PNG)
+![Résultat du test avec moo@example.com](images/livrable14.PNG)
+
 ---
 
 ### Explorer les liens "Phishy" et le courrier électronique "Phishy"
@@ -328,11 +378,16 @@ Pour cette tâche, prenez des captures d'écran de :
 
 - Vos inspections d'un en-tête de courrier électronique à partir de votre propre boîte de réception
 
+Je prend l'entête du courrier que j'ai envoyé sur mon gmail avec moo@example.com
+
+![Résultat du test avec moo@example.com](images/livrable13.PNG)
+
+
 ---
 #### Partagez avec nous vos conclusions.
 
 ```
-Conclusions :
+Conclusions : La source smtp.mail.from "moo@eexample" n'est pas cohérente avec le received from "mail.poursuites.ch". Cela peut mettre la puce à l'oreille sur le fait que ce soit un spam
 ```
 ---
 
